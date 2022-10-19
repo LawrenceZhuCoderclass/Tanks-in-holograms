@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     private Rigidbody rbBullet;
     public GameObject barrel;
+    public GameObject hole;
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
     private float roty = 0.0f;
@@ -32,6 +33,12 @@ public class PlayerController : MonoBehaviour
             {
                 shootMode = false;
             }
+            if (Input.GetKeyDown("l"))
+            {
+                Debug.Log("trying to shoot");
+                Instantiate(bullet, hole.transform.position, hole.transform.rotation);
+                //rbBullet.velocity = transform.TransformDirection(Vector3.forward * 10);
+            }
             float RotateHorizontal = Input.GetAxis("Horizontal");
             float RotateVertical = Input.GetAxis("Vertical");
             rotx -= RotateHorizontal * rotateSpeed;
@@ -42,8 +49,6 @@ public class PlayerController : MonoBehaviour
             HorizontalRotation -= roty;
             VertRotation = Mathf.Clamp(roty, -90.0f, 0.0f);
             HorizontalRotation = Mathf.Clamp(rotx, -180.0f, 180.0f);
-
-
             barrel.transform.eulerAngles = new Vector3 (VertRotation, -HorizontalRotation, 0.0f);
         }
 

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 677, y: 492}
   m_MaxSize: {x: 14001, y: 14042}
   vertical: 0
-  controlID: 2129
+  controlID: 122
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -219,7 +219,7 @@ MonoBehaviour:
   m_MinSize: {x: 402, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 2130
+  controlID: 55
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -311,19 +311,19 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Scripts
+    - Assets/Scenes
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Scripts
+  - Assets/Scenes
   m_LastFoldersGridSize: -1
   m_LastProjectPath: C:\Users\Eigenaar\OneDrive\Documents\GitHub\Tanks in Holograms
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: de3a0000
-    m_LastClickedID: 15070
+    m_SelectedIDs: 12370000
+    m_LastClickedID: 14098
     m_ExpandedIDs: 0000000006370000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -445,7 +445,7 @@ MonoBehaviour:
     m_PrefName: Preview_InspectorPreview
   m_PreviewWindow: {fileID: 0}
   m_LastInspectedObjectInstanceID: -1
-  m_LastVerticalScrollValue: 0
+  m_LastVerticalScrollValue: 100
 --- !u!114 &14
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -475,9 +475,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 92360000
-      m_LastClickedID: 13970
-      m_ExpandedIDs: 68fbffff
+      m_SelectedIDs: 
+      m_LastClickedID: 0
+      m_ExpandedIDs: 2ac2ffff68fbffffa0360000b8360000c6360000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -537,9 +537,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -92.92701, y: -0.04335022, z: 29.752945}
+    m_Target: {x: 22.713112, y: -14.924778, z: 5.023674}
     speed: 2
-    m_Value: {x: -92.92701, y: -0.04335022, z: 29.752945}
+    m_Value: {x: 22.713112, y: -14.924778, z: 5.023674}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -585,13 +585,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.29182607, y: -0.16675586, z: 0.051747818, w: 0.940401}
+    m_Target: {x: 0.22615285, y: 0.62485576, z: -0.19596253, w: 0.7211197}
     speed: 2
-    m_Value: {x: 0.29166928, y: -0.16957617, z: 0.052623015, w: 0.9398957}
+    m_Value: {x: 0.22615232, y: 0.62485427, z: -0.19596207, w: 0.721118}
   m_Size:
-    m_Target: 106.96277
+    m_Target: 14.603575
     speed: 2
-    m_Value: 102.35672
+    m_Value: 14.603575
   m_Ortho:
     m_Target: 0
     speed: 2
