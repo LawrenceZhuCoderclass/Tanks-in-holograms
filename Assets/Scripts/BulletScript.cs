@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Rigidbody rb;
+    public GameObject gameObject;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -13,6 +14,13 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-       transform.Translate(Vector3.up * Time.deltaTime * 3);
+       transform.Translate(Vector3.up * Time.deltaTime * 10);
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            Destroy(gameObject);
+        }
     }
 }

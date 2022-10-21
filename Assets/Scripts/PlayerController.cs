@@ -36,8 +36,7 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown("l"))
             {
                 Debug.Log("trying to shoot");
-                Instantiate(bullet, hole.transform.position, hole.transform.rotation);
-                //rbBullet.velocity = transform.TransformDirection(Vector3.forward * 10);
+                Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
             }
             float RotateHorizontal = Input.GetAxis("Horizontal");
             float RotateVertical = Input.GetAxis("Vertical");
@@ -58,9 +57,10 @@ public class PlayerController : MonoBehaviour
             {
                 shootMode = true;
             }
+            
             float MoveHorizontal = Input.GetAxis("Horizontal");
             float MoveVertical = Input.GetAxis("Vertical");
-            Vector3 move = new Vector3(MoveHorizontal, 0.0f, MoveVertical);
+            Vector3 move = new Vector3(MoveHorizontal, -1.0f, MoveVertical);
             rb.velocity = move * speed;
         }
     }
