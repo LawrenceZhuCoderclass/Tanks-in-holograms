@@ -10,13 +10,16 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     private Rigidbody rbBullet;
     public GameObject barrel;
+    public Transform Barrel_rotator;
     public GameObject hole;
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
     private float roty = 0.0f;
     private float VertRotation;
     private float HorizontalRotation;
-
+    private float MoveHorizontal;
+    private float MoveVertical;
+    private bool IsGrounded = false;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -32,18 +35,13 @@ public class PlayerController : MonoBehaviour
             if (Input.GetKeyDown("k"))
             {
                 shootMode = false;
+                rb.isKinematic = false;
             }
-            if (Input.GetKeyDown("l"))
-            {
-                Debug.Log("trying to shoot");
-                Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
-            }
+            Debug.Log(rb.velocity);
             float RotateHorizontal = Input.GetAxis("Horizontal");
             float RotateVertical = Input.GetAxis("Vertical");
             rotx -= RotateHorizontal * rotateSpeed;
             roty -= RotateVertical * rotateSpeed;
-            Debug.Log("rotx: " + rotx);
-            Debug.Log("roty: " + roty);
             VertRotation -= rotx;
             HorizontalRotation -= roty;
             VertRotation = Mathf.Clamp(roty, -90.0f, 0.0f);
@@ -52,35 +50,44 @@ public class PlayerController : MonoBehaviour
         }
 
         else if (shootMode == false)
-        {
+        {         
+            MoveHorizontal = Input.GetAxis("Horizontal");
+            MoveVertical = Input.GetAxis("Vertical");
+            if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
+            {
+                rb.isKinematic = true;
+            }
+            else
+            {
+                rb.isKinematic = false;
+            }
             if (Input.GetKeyDown("k"))
             {
                 shootMode = true;
-            }
-            
-            float MoveHorizontal = Input.GetAxis("Horizontal");
-            float MoveVertical = Input.GetAxis("Vertical");
+                rb.isKinematic = true;
+                MoveHorizontal = 0.0f;
+                MoveVertical = 0.0f;
+            }  
             Vector3 move = new Vector3(MoveHorizontal, -1.0f, MoveVertical);
             rb.velocity = move * speed;
         }
     }
-}
-        /*if (shootMode = true)
+    void Update()
+    {
+        if (shootMode == true)
         {
-            float RotateHorizontal = Input.GetAxis("Horizontal");
-            float RotateVertical = Input.GetAxis("Vertical");
-            Quaternion rotation = Quaternion.Euler(RotateHorizontal, RotateVertical, 0);
-            Debug.Log(rotation);
-            barrel.transform.rotation = Quaternion.Slerp(barrel.transform.rotation, rotation, Time.deltaTime * rotateSpeed);
-
-        }*/
-        /*else if (shootMode = false)
-        {
-            Debug.Log("you are now out of shoot mode");
-            if (Input.GetKeyDown("j"))
+            if (Input.GetKeyDown("l"))
             {
-                shootMode = true;
-                Debug.Log("you are now out of shootmode");
+                Debug.Log("trying to shoot");
+                Instantiate(bullet, hole.transform.position, Barrel_rotator.rotation);
             }
-            Debug.Log("you are now playing");*/
-    //}
+        }
+    }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            IsGrounded = true;
+        }
+    }
+}

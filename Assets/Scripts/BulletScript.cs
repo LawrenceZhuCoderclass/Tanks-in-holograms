@@ -14,7 +14,7 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-       transform.Translate(Vector3.up * Time.deltaTime * 10);
+       transform.Translate(Vector3.forward * Time.deltaTime * 10);
     }
     void OnCollisionEnter(Collision collision)
     {
