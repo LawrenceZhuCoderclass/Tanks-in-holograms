@@ -5,13 +5,17 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    private bool shootMode = false;
-    public float speed;
-    public GameObject bullet;
     private Rigidbody rbBullet;
-    public GameObject barrel;
     public Transform Barrel_rotator;
+
+    private bool shootMode = false;
+    
+    public float speed;
+    
+    public GameObject bullet;
+    public GameObject barrel;
     public GameObject hole;
+    
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
     private float roty = 0.0f;
@@ -44,13 +48,28 @@ public class PlayerController : MonoBehaviour
                 }
                 float RotateHorizontal = Input.GetAxis("Horizontal");
                 float RotateVertical = Input.GetAxis("Vertical");
-                rotx -= RotateHorizontal * rotateSpeed;
-                roty -= RotateVertical * rotateSpeed;
-                VertRotation -= rotx;
-                HorizontalRotation -= roty;
-                VertRotation = Mathf.Clamp(roty, -90.0f, 0.0f);
-                HorizontalRotation = Mathf.Clamp(rotx, -180.0f, 180.0f);
-                barrel.transform.eulerAngles = new Vector3 (VertRotation, -HorizontalRotation, 0.0f);
+                if (this.gameObject.tag == "Player_1")
+                {
+                    rotx -= RotateHorizontal * rotateSpeed;
+                    roty -= RotateVertical * rotateSpeed;
+                    VertRotation -= rotx;
+                    HorizontalRotation -= roty;
+                    
+                    VertRotation = Mathf.Clamp(roty, -90.0f, 0.0f);
+                    HorizontalRotation = Mathf.Clamp(rotx, -180.0f, 180.0f);
+                    barrel.transform.eulerAngles = new Vector3 (VertRotation, -HorizontalRotation, 0.0f);
+                }
+                else 
+                {
+                    rotx -= RotateHorizontal * rotateSpeed;
+                    roty -= -RotateVertical * rotateSpeed;
+                    VertRotation -= rotx;
+                    HorizontalRotation -= roty;
+                    
+                    VertRotation = Mathf.Clamp(roty, -90.0f, 0.0f);
+                    HorizontalRotation = Mathf.Clamp(rotx, -180.0f, 180.0f);
+                    barrel.transform.eulerAngles = new Vector3 (VertRotation, -HorizontalRotation +180.0f, 0.0f);
+                }
             }
 
             else if (shootMode == false)
