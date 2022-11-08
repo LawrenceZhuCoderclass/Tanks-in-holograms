@@ -48,39 +48,11 @@ public class PlayerController : MonoBehaviour
                 }
                 float RotateHorizontal = Input.GetAxis("Horizontal");
                 float RotateVertical = Input.GetAxis("Vertical");
-                if (gameObject.tag == "Player_1")
-                {
-                    rotx -= RotateHorizontal * rotateSpeed;
-                    roty -= RotateVertical * rotateSpeed;
-                    //VertRotation = roty;
-                    //HorizontalRotation = rotx;
+                rotx -= RotateHorizontal * rotateSpeed;
+                roty -= RotateVertical * rotateSpeed;
 
-                    roty = Mathf.Clamp(roty, -90.0f, 0.0f);
-                    //HorizontalRotation = Mathf.Clamp(rotx, -180.0f, 180.0f);
-                    barrel.transform.eulerAngles = new Vector3(roty, -rotx, 0.0f);
-
-
-                    //barrel.transform.Rotate(Vector3.up * RotateHorizontal * 60f * Time.fixedDeltaTime);
-                    //barrel.transform.Rotate(Vector3.left * RotateVertical * 60f * Time.fixedDeltaTime);
-                    //if (Input.GetKey(KeyCode.A))
-                    //    barrel.transform.Rotate(-Vector3.up * 60f * Time.fixedDeltaTime);
-                }
-                else 
-                {
-                    rotx -= RotateHorizontal * rotateSpeed;
-                    roty -= -RotateVertical * rotateSpeed;
-                    //VertRotation = roty;
-                    //HorizontalRotation = rotx;
-
-                    roty = Mathf.Clamp(roty, -90.0f, 0.0f);
-                    //HorizontalRotation = Mathf.Clamp(rotx, -180.0f, 180.0f);
-                    barrel.transform.eulerAngles = new Vector3(roty, -rotx + 180.0f, 0.0f);
-                    //if (Input.GetKey(KeyCode.D))
-                    //    barrel.transform.Rotate(Vector3.up * 60f * Time.fixedDeltaTime);
-
-                    //if (Input.GetKey(KeyCode.A))
-                    //    barrel.transform.Rotate(-Vector3.up * 60f * Time.fixedDeltaTime);
-                }
+                roty = Mathf.Clamp(roty, -90.0f, 40.0f);
+                barrel.transform.eulerAngles = new Vector3(roty, -rotx, 0.0f);
             }
 
             else if (shootMode == false)
