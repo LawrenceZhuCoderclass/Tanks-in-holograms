@@ -6,7 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
     private Rigidbody rbBullet;
-    public Transform Barrel_rotator;
 
     private bool shootMode = false;
     
@@ -19,8 +18,6 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
     private float roty = 0.0f;
-    private float VertRotation;
-    private float HorizontalRotation;
     private float MoveHorizontal;
     private float MoveVertical;
     private bool IsGrounded = false;
@@ -32,6 +29,8 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         rbBullet = bullet.GetComponent<Rigidbody>();
+        rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
+        OwnTurn = false;
     }
 
 
@@ -44,7 +43,7 @@ public class PlayerController : MonoBehaviour
                 if (Input.GetKeyDown("k"))
                 {
                     shootMode = false;
-                    rb.isKinematic = false;
+                    rb.constraints = RigidbodyConstraints.None;
                 }
                 float RotateHorizontal = Input.GetAxis("Horizontal");
                 float RotateVertical = Input.GetAxis("Vertical");
@@ -56,29 +55,33 @@ public class PlayerController : MonoBehaviour
             }
 
             else if (shootMode == false)
-            {         
+            {
                 MoveHorizontal = Input.GetAxis("Horizontal");
                 MoveVertical = Input.GetAxis("Vertical");
                 if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
                 {
-                    rb.isKinematic = true;
+                    rb.constraints = RigidbodyConstraints.FreezePosition;
                 }
-                else 
+                else
                 {
-                    rb.isKinematic = false;
+                    rb.constraints = RigidbodyConstraints.None;
                 }
                 if (Input.GetKeyDown("k"))
                 {
                     shootMode = true;
-                    rb.isKinematic = true;
+                    rb.constraints = RigidbodyConstraints.FreezePosition;
                     MoveHorizontal = 0.0f;
                     MoveVertical = 0.0f;
-                }  
+                }
                 Vector3 move = new Vector3(MoveHorizontal, -1.0f, MoveVertical);
                 rb.velocity = move * speed;
             }
         }
-
+        else
+        {
+            Vector3 move = new Vector3(0.0f, -1.0f, 0.0f);
+            rb.velocity = move * speed;
+        }
     }
     void Update()
     {
@@ -86,25 +89,29 @@ public class PlayerController : MonoBehaviour
         {
             if (Input.GetKeyDown("l"))
             {
-                Instantiate(bullet, hole.transform.position, Barrel_rotator.rotation);
+                Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
                 shootMode = false;
-                rb.isKinematic = false;
+                rb.constraints = RigidbodyConstraints.None;
                 Gamecontroller.NextTurn();
             }
         }
     }
     void OnCollisionEnter(Collision collision)
     {
-            if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Ground")
+        {
+            IsGrounded = true;              
+            if(this.gameObject.tag == "Player_2" && TouchOnce == true)
             {
-                IsGrounded = true;              
-                if(this.gameObject.tag == "Player_2" && TouchOnce == true)
-                {
-                    OwnTurn = false;
-                    rb.isKinematic = true;
-                }
-                TouchOnce = false;
+                OwnTurn = false;
+                rb.constraints = RigidbodyConstraints.FreezePosition;
             }
-
+            else if(TouchOnce == true)
+            {
+                OwnTurn = true;
+                rb.constraints = RigidbodyConstraints.None;
+            }
+            TouchOnce = false;
+        }
     }
 }
