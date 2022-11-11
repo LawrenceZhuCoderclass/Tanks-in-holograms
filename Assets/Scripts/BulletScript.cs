@@ -6,10 +6,12 @@ public class BulletScript : MonoBehaviour
 {
     private Rigidbody rb;
     public GameObject gameObject;
+    public SphereCollider Collider;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        
+        Collider = GetComponent<SphereCollider>();
     }
 
     void Update()
@@ -18,9 +20,10 @@ public class BulletScript : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Ground")
+        if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
         {
-            Destroy(gameObject);
+            Debug.Log("Player hit!!!");
         }
+        Destroy(gameObject);
     }
 }
