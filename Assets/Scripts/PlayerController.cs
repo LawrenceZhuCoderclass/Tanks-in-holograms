@@ -24,6 +24,8 @@ public class PlayerController : MonoBehaviour
     public GameController Gamecontroller;
     public bool OwnTurn;
     private bool TouchOnce = true;
+    private float Fuel = 10.0f;
+    private float BrunRate = 1.0f;
 
     void Start()
     {
@@ -66,6 +68,10 @@ public class PlayerController : MonoBehaviour
                 {
                     rb.constraints = RigidbodyConstraints.None;
                 }
+                if (MoveHorizontal != 0.0f || MoveVertical != 0.0f)
+                {
+                    Fuel -= BrunRate * Time.deltaTime;
+                }
                 if (Input.GetKeyDown("k"))
                 {
                     shootMode = true;
@@ -73,8 +79,16 @@ public class PlayerController : MonoBehaviour
                     MoveHorizontal = 0.0f;
                     MoveVertical = 0.0f;
                 }
-                Vector3 move = new Vector3(MoveHorizontal, -1.0f, MoveVertical);
-                rb.velocity = move * speed;
+                if(Fuel > 0.0f)
+                {
+                    Vector3 move = new Vector3(MoveHorizontal, -1.0f, MoveVertical);
+                    rb.velocity = move * speed;
+                }
+                else 
+                {
+                    rb.constraints = RigidbodyConstraints.FreezePosition;
+                }
+
             }
         }
         else
