@@ -5,13 +5,11 @@ using UnityEngine;
 public class BulletScript : MonoBehaviour
 {
     private Rigidbody rb;
-    public GameObject gameObject;
-    public SphereCollider Collider;
+    public GameObject Explosion;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        Collider = GetComponent<SphereCollider>();
     }
 
     void Update()
@@ -20,10 +18,11 @@ public class BulletScript : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
+        Instantiate(Explosion, this.transform.position, this.transform.rotation);
+        /*if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
         {
             Debug.Log("Player hit!!!");
-        }
-        Destroy(gameObject);
+        }*/
+        Destroy(this.gameObject);
     }
 }
