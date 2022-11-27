@@ -8,18 +8,22 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rbBullet;
 
     private bool shootMode = false;
-    
+
     public float speed;
-    
+
     public GameObject bullet;
     public GameObject barrel;
     public GameObject hole;
-    
+    public GameObject cameraRotator;
+
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
     private float roty = 0.0f;
     private float MoveHorizontal;
     private float MoveVertical;
+    private float CorrectMoveX;
+    private float CorrectMoveZ;
+    private float cameraAngle;
     private bool IsGrounded = false;
     public GameController Gamecontroller;
     public bool OwnTurn;
@@ -79,12 +83,16 @@ public class PlayerController : MonoBehaviour
                     MoveHorizontal = 0.0f;
                     MoveVertical = 0.0f;
                 }
-                if(Fuel > 0.0f)
+                if (Fuel > 0.0f)
                 {
-                    Vector3 move = new Vector3(MoveHorizontal, -1.0f, MoveVertical);
+                    cameraAngle = (cameraRotator.transform.eulerAngles.y) * Mathf.Deg2Rad;
+                    CorrectMoveX = MoveHorizontal * Mathf.Cos(cameraAngle) + MoveVertical * Mathf.Sin(cameraAngle);
+                    CorrectMoveZ = MoveVertical * Mathf.Cos(cameraAngle) - MoveHorizontal * Mathf.Sin(cameraAngle);
+
+                    Vector3 move = new Vector3(CorrectMoveX, -1.0f, CorrectMoveZ);
                     rb.velocity = move * speed;
                 }
-                else 
+                else
                 {
                     rb.constraints = RigidbodyConstraints.FreezePosition;
                 }
@@ -114,13 +122,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.tag == "Ground")
         {
-            IsGrounded = true;              
-            if(this.gameObject.tag == "Player_2" && TouchOnce == true)
+            IsGrounded = true;
+            if (this.gameObject.tag == "Player_2" && TouchOnce == true)
             {
                 OwnTurn = false;
                 rb.constraints = RigidbodyConstraints.FreezePosition;
             }
-            else if(TouchOnce == true)
+            else if (TouchOnce == true)
             {
                 OwnTurn = true;
                 rb.constraints = RigidbodyConstraints.None;
