@@ -10,6 +10,13 @@ public class GameController : MonoBehaviour
 
     private PlayerController player_1_script;
     private PlayerController player_2_script;
+    public enum Gamestate
+    {
+        Start,
+        Playing,
+        Paused,
+        End
+    }
 
     private bool currentturn;
     void Start()
