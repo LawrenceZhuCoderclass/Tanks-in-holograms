@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
     private bool TouchOnce = true;
     private float Fuel = 10.0f;
     private float BrunRate = 1.0f;
+    private float hp = 5.0f;
 
     void Start()
     {
@@ -105,6 +106,17 @@ public class PlayerController : MonoBehaviour
             rb.velocity = move * speed;
         }
     }
+
+    public void TakeDamage(float damage)
+    {
+        hp = hp - damage;
+        Debug.Log(hp);
+        if (hp <= 0)
+        {
+            //lose game
+        }
+    }
+
     void Update()
     {
         if (shootMode == true)

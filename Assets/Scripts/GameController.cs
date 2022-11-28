@@ -34,5 +34,5 @@ public class GameController : MonoBehaviour
             player_1_script.OwnTurn = true;
             player_2_script.OwnTurn = false;
         }
-    } 
+    }
 }

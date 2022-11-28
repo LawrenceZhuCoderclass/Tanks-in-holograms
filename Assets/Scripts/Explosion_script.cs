@@ -21,8 +21,12 @@ public class Explosion_script : MonoBehaviour
         }
 
     }
-    void OnCollisionEnter ()
+    void OnCollisionEnter (Collision collision)
     {
         Debug.Log("Hit");
+        if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
+        {
+            collision.gameObject.GetComponent<PlayerController>().TakeDamage(Mathf.Pow(1/collider.radius, 2));
+        }
     }
 }
