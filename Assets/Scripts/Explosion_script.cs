@@ -27,6 +27,7 @@ public class Explosion_script : MonoBehaviour
         if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(Mathf.Pow(1/collider.radius, 2));
+            //collision.gameObject.GetComponent<PlayerController>().TakeDamage(2.0f);
         }
     }
 }
