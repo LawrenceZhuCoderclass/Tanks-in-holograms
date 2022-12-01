@@ -110,6 +110,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hp = hp - damage;
+        hp = Mathf.Clamp(hp, 0, Mathf.Infinity);
         Debug.Log(hp);
         if (hp <= 0)
         {
