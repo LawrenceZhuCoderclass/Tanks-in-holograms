@@ -47,18 +47,18 @@ public class PlayerController : MonoBehaviour
         {
             if (shootMode == true)
             {
-                if (Input.GetKeyDown("k"))
-                {
-                    shootMode = false;
-                    rb.constraints = RigidbodyConstraints.None;
-                }
+                //if (Input.GetKeyDown("k"))
+                //{
+                //    shootMode = false;
+                //    rb.constraints = RigidbodyConstraints.None;
+                //}
                 float RotateHorizontal = Input.GetAxis("Horizontal");
                 float RotateVertical = Input.GetAxis("Vertical");
                 rotx -= RotateHorizontal * rotateSpeed;
                 roty -= RotateVertical * rotateSpeed;
 
-                roty = Mathf.Clamp(roty, -90.0f, 40.0f);
-                barrel.transform.eulerAngles = new Vector3(roty, -rotx, 0.0f);
+                roty = Mathf.Clamp(roty, -40.0f, 90.0f);
+                barrel.transform.eulerAngles = new Vector3(-roty, -rotx, 0.0f);
             }
 
             else if (shootMode == false)
@@ -77,13 +77,13 @@ public class PlayerController : MonoBehaviour
                 {
                     Fuel -= BrunRate * Time.deltaTime;
                 }
-                if (Input.GetKeyDown("k"))
-                {
-                    shootMode = true;
-                    rb.constraints = RigidbodyConstraints.FreezePosition;
-                    MoveHorizontal = 0.0f;
-                    MoveVertical = 0.0f;
-                }
+                //if (Input.GetKeyDown("k"))
+                //{
+                //    shootMode = true;
+                //    rb.constraints = RigidbodyConstraints.FreezePosition;
+                //    MoveHorizontal = 0.0f;
+                //    MoveVertical = 0.0f;
+                //}
                 if (Fuel > 0.0f)
                 {
                     cameraAngle = (cameraRotator.transform.eulerAngles.y) * Mathf.Deg2Rad;
@@ -120,14 +120,32 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (shootMode == true)
+        if (OwnTurn == true)
         {
-            if (Input.GetKeyDown("l"))
+            if (shootMode == true)
             {
-                Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
-                shootMode = false;
-                rb.constraints = RigidbodyConstraints.None;
-                Gamecontroller.NextTurn();
+                if (Input.GetKeyDown("l"))
+                {
+                    Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
+                    shootMode = false;
+                    rb.constraints = RigidbodyConstraints.None;
+                    Gamecontroller.NextTurn();
+                }
+                if (Input.GetKeyDown("k"))
+                {
+                    shootMode = false;
+                    rb.constraints = RigidbodyConstraints.None;
+                }
+            }
+            else
+            {
+                if (Input.GetKeyDown("k"))
+                {
+                    shootMode = true;
+                    rb.constraints = RigidbodyConstraints.FreezePosition;
+                    MoveHorizontal = 0.0f;
+                    MoveVertical = 0.0f;
+                }
             }
         }
     }
