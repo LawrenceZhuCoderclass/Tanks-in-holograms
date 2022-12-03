@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
     private float Fuel = 10.0f;
     private float BrunRate = 1.0f;
     public float hp = 10.0f;
+    public string otherPlayer;
 
     void Start()
     {
@@ -38,6 +39,14 @@ public class PlayerController : MonoBehaviour
         rbBullet = bullet.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         OwnTurn = false;
+        if (this.tag == "player_1")
+        {
+            otherPlayer = "player_2";
+        }
+        else 
+        {
+            otherPlayer = "Player_1";
+        }
     }
 
 
@@ -111,10 +120,9 @@ public class PlayerController : MonoBehaviour
     {
         hp = hp - damage;
         hp = Mathf.Clamp(hp, 0, Mathf.Infinity);
-        Debug.Log(hp);
         if (hp <= 0)
         {
-            //lose game
+            Gamecontroller.Winner_Declaration(otherPlayer);
         }
     }
 

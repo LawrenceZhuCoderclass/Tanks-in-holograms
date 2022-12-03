@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
@@ -10,15 +11,18 @@ public class GameController : MonoBehaviour
 
     private PlayerController player_1_script;
     private PlayerController player_2_script;
-    public enum Gamestate
+    private GameState gameState;
+    
+    private bool currentturn;
+
+    public enum GameState
     {
-        Start,
+        //Start,
         Playing,
-        Paused,
+        //Paused,
         End
     }
 
-    private bool currentturn;
     void Start()
     {
         player_1_script = player_1.GetComponent<PlayerController>();
@@ -26,7 +30,33 @@ public class GameController : MonoBehaviour
         currentturn = true;
         //true means player-1's turn, false means player_2's turn
     }
-    
+
+    void Update()
+    {
+        switch(gameState)
+        {
+            case GameState.Playing:
+                // Here comes the code where you check if something is clicked for the pause mode
+                break;
+            case GameState.End:
+                if (Input.GetKeyDown("r"))
+                {
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    Debug.Log(Time.timeScale);
+                    Time.timeScale = 1;
+                }
+                break;
+
+        }
+    }
+    public void Winner_Declaration(string name)
+    {
+        Debug.Log(name + "is the winner!!!");
+        gameState = GameState.End;
+        Time.timeScale = 0;
+        player_1_script.enabled = false;
+        player_2_script.enabled = false;
+    }
     public void NextTurn()
     {
         if (currentturn == true)
