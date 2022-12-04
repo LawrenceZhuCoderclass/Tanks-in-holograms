@@ -32,6 +32,10 @@ public class PlayerController : MonoBehaviour
     private float BrunRate = 1.0f;
     public float hp = 10.0f;
     public string otherPlayer;
+    private string playerXInput;
+    private string playerYInput;
+    private string modeInput;
+    private string shootInput;
 
     void Start()
     {
@@ -39,13 +43,28 @@ public class PlayerController : MonoBehaviour
         rbBullet = bullet.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         OwnTurn = false;
-        if (this.tag == "player_1")
+        if (tag == "player_1")
         {
             otherPlayer = "player_2";
         }
         else 
         {
             otherPlayer = "Player_1";
+        }
+
+        if (Gamecontroller.controllerUsed)
+        {
+            playerXInput = "ControllerPlayerHorizontal";
+            playerYInput = "ControllerPlayerVertical";
+            modeInput = "ControllerSwitchMode";
+            shootInput = "ControllerShoot";
+        }
+        else
+        {
+            playerXInput = "PlayerHorizontal";
+            playerYInput = "PlayerVertical";
+            modeInput = "SwitchMode";
+            shootInput = "Shoot";
         }
     }
 
@@ -61,8 +80,8 @@ public class PlayerController : MonoBehaviour
                 //    shootMode = false;
                 //    rb.constraints = RigidbodyConstraints.None;
                 //}
-                float RotateHorizontal = Input.GetAxis("Horizontal");
-                float RotateVertical = Input.GetAxis("Vertical");
+                float RotateHorizontal = Input.GetAxis(playerXInput);
+                float RotateVertical = Input.GetAxis(playerYInput);
                 rotx -= RotateHorizontal * rotateSpeed;
                 roty -= RotateVertical * rotateSpeed;
 
@@ -72,8 +91,10 @@ public class PlayerController : MonoBehaviour
 
             else if (shootMode == false)
             {
-                MoveHorizontal = Input.GetAxis("Horizontal");
-                MoveVertical = Input.GetAxis("Vertical");
+                if (Gamecontroller.mirrorControls) { MoveHorizontal = -Input.GetAxis(playerXInput); }
+                else { MoveHorizontal = Input.GetAxis(playerXInput); }
+                MoveVertical = Input.GetAxis(playerYInput);
+
                 if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
                 {
                     rb.constraints = RigidbodyConstraints.FreezePosition;
@@ -106,7 +127,6 @@ public class PlayerController : MonoBehaviour
                 {
                     rb.constraints = RigidbodyConstraints.FreezePosition;
                 }
-
             }
         }
         else
@@ -132,14 +152,14 @@ public class PlayerController : MonoBehaviour
         {
             if (shootMode == true)
             {
-                if (Input.GetKeyDown("l"))
+                if (Input.GetButtonDown(shootInput))
                 {
                     Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
                     shootMode = false;
                     rb.constraints = RigidbodyConstraints.None;
                     Gamecontroller.NextTurn();
                 }
-                if (Input.GetKeyDown("k"))
+                if (Input.GetButtonDown(modeInput))
                 {
                     shootMode = false;
                     rb.constraints = RigidbodyConstraints.None;
@@ -147,7 +167,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
-                if (Input.GetKeyDown("k"))
+                if (Input.GetButtonDown(modeInput))
                 {
                     shootMode = true;
                     rb.constraints = RigidbodyConstraints.FreezePosition;

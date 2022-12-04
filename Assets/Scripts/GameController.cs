@@ -12,6 +12,10 @@ public class GameController : MonoBehaviour
     private PlayerController player_1_script;
     private PlayerController player_2_script;
     private GameState gameState;
+
+    public bool mirrorControls;
+    public bool pyramidDisplay;
+    public bool controllerUsed;
     
     private bool currentturn;
 
