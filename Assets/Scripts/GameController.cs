@@ -22,6 +22,8 @@ public class GameController : MonoBehaviour
     public GameObject pyramidDisplay;
     public GameObject normalCamera;
 
+    public WindScript windController;
+
     public enum GameState
     {
         //Start,
@@ -76,6 +78,7 @@ public class GameController : MonoBehaviour
     }
     public void NextTurn()
     {
+        windController.changeWind();
         if (currentturn == true)
         {
             currentturn = false;
