@@ -14,7 +14,7 @@ public class PlayerController : MonoBehaviour
     public GameObject bullet;
     public GameObject barrel;
     public GameObject hole;
-    public GameObject cameraRotator;
+    //public GameObject cameraRotator;
 
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
     private float MoveVertical;
     private float CorrectMoveX;
     private float CorrectMoveZ;
-    private float cameraAngle;
+    public float cameraAngle;
     private bool IsGrounded = false;
     public GameController Gamecontroller;
     public bool OwnTurn;
@@ -116,7 +116,7 @@ public class PlayerController : MonoBehaviour
                 //}
                 if (Fuel > 0.0f)
                 {
-                    cameraAngle = (cameraRotator.transform.eulerAngles.y) * Mathf.Deg2Rad;
+                    //cameraAngle = (cameraRotator.transform.eulerAngles.y) * Mathf.Deg2Rad;
                     CorrectMoveX = MoveHorizontal * Mathf.Cos(cameraAngle) + MoveVertical * Mathf.Sin(cameraAngle);
                     CorrectMoveZ = MoveVertical * Mathf.Cos(cameraAngle) - MoveHorizontal * Mathf.Sin(cameraAngle);
 

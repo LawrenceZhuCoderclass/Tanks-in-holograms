@@ -14,10 +14,13 @@ public class GameController : MonoBehaviour
     private GameState gameState;
 
     public bool mirrorControls;
-    public bool pyramidDisplay;
+    public bool pyramidUsed;
     public bool controllerUsed;
     
     private bool currentturn;
+
+    public GameObject pyramidDisplay;
+    public GameObject normalCamera;
 
     public enum GameState
     {
@@ -33,6 +36,16 @@ public class GameController : MonoBehaviour
         player_2_script = player_2.GetComponent<PlayerController>(); 
         currentturn = true;
         //true means player-1's turn, false means player_2's turn
+        if (pyramidUsed)
+        {
+            pyramidDisplay.SetActive(true);
+            normalCamera.SetActive(false);
+        }
+        else
+        {
+            normalCamera.SetActive(true);
+            pyramidDisplay.SetActive(false);
+        }
     }
 
     void Update()
