@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Rigidbody rbBullet;
 
-    private bool shootMode = false;
+    public bool shootMode = false;
 
     public float speed;
 
@@ -41,6 +41,8 @@ public class PlayerController : MonoBehaviour
     private string playerYInput;
     private string modeInput;
     private string shootInput;
+    private string posPowerInput;
+    private string negPowerInput;
 
     void Start()
     {
@@ -66,6 +68,8 @@ public class PlayerController : MonoBehaviour
             playerYInput = "ControllerPlayerVertical";
             modeInput = "ControllerSwitchMode";
             shootInput = "ControllerShoot";
+            posPowerInput = "ControllerPositivePowerInput";
+            negPowerInput = "ControllerNegativePowerInput";
         }
         else
         {
@@ -73,6 +77,8 @@ public class PlayerController : MonoBehaviour
             playerYInput = "PlayerVertical";
             modeInput = "SwitchMode";
             shootInput = "Shoot";
+            posPowerInput = "positivePowerInput";
+            negPowerInput = "negativePowerInput";
         }
     }
 
@@ -96,8 +102,8 @@ public class PlayerController : MonoBehaviour
                 roty = Mathf.Clamp(roty, -40.0f, 90.0f);
                 barrelRotator.transform.eulerAngles = new Vector3(-roty, -rotx, 0.0f);
 
-                float PosChangePower = 1.5f * Input.GetAxis("positivePowerInput");
-                float NegChangePower = 1.5f * Input.GetAxis("negativePowerInput");
+                float PosChangePower = 1.5f * Input.GetAxis(posPowerInput);
+                float NegChangePower = 1.5f * Input.GetAxis(negPowerInput);
                 if (power + PosChangePower - NegChangePower <= maxPower && power + PosChangePower - NegChangePower >= 0)
                 {
                     power += PosChangePower - NegChangePower;
@@ -176,9 +182,10 @@ public class PlayerController : MonoBehaviour
                 {
                     GameObject shotBullet = Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
                     shotBullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, power, 0));
-                    shootMode = false;
+                    //shootMode = false;
                     rb.constraints = RigidbodyConstraints.FreezePosition;
-                    Gamecontroller.NextTurn();
+                    OwnTurn = false;
+                    //Gamecontroller.NextTurn();
                 }
                 if (Input.GetButtonDown(modeInput))
                 {

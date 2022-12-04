@@ -613,6 +613,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ece3f1c76c26d841992c681bd4b46b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootMode: 0
   speed: 3
   bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
   barrelRotator: {fileID: 115974992}
@@ -1576,6 +1577,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ece3f1c76c26d841992c681bd4b46b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shootMode: 0
   speed: 3
   bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
   barrelRotator: {fileID: 724232510}
@@ -1818,7 +1820,7 @@ GameObject:
   - component: {fileID: 1566331076}
   m_Layer: 0
   m_Name: GameController
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
