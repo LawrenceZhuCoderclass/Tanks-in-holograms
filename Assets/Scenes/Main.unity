@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!64 &36769990
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -215,7 +215,7 @@ Transform:
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &36769994
 MonoBehaviour:
@@ -277,7 +277,7 @@ Transform:
   - {fileID: 389404038}
   - {fileID: 115974993}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &107910278
 GameObject:
@@ -615,13 +615,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
-  barrel: {fileID: 115974992}
+  barrelRotator: {fileID: 115974992}
+  barrel: {fileID: 160660437}
   hole: {fileID: 1516061788}
   rotateSpeed: 5
   cameraAngle: 0
   Gamecontroller: {fileID: 1566331076}
   OwnTurn: 1
   hp: 5
+  beginPower: 1000
+  power: 0
   otherPlayer: 
 --- !u!54 &389404034
 Rigidbody:
@@ -948,7 +951,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &724007601
 GameObject:
@@ -1575,13 +1578,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 3
   bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
-  barrel: {fileID: 724232510}
+  barrelRotator: {fileID: 724232510}
+  barrel: {fileID: 955843762}
   hole: {fileID: 235548194}
   rotateSpeed: 5
   cameraAngle: 0
   Gamecontroller: {fileID: 1566331076}
   OwnTurn: 1
   hp: 5
+  beginPower: 1000
+  power: 0
   otherPlayer: 
 --- !u!54 &1445489832
 Rigidbody:
@@ -1794,7 +1800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1516061788}
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 2.075, z: 0.56}
+  m_LocalPosition: {x: 0, y: 2.075, z: 0}
   m_LocalScale: {x: 5, y: 5, z: 2}
   m_Children: []
   m_Father: {fileID: 160660438}
@@ -1831,9 +1837,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player_1: {fileID: 389404032}
   player_2: {fileID: 1445489830}
-  mirrorControls: 1
-  pyramidUsed: 1
-  controllerUsed: 0
+  mirrorControls: 0
+  pyramidUsed: 0
+  controllerUsed: 1
   pyramidDisplay: {fileID: 1060631660}
   normalCamera: {fileID: 521849584}
 --- !u!4 &1566331077
@@ -1848,7 +1854,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1584993915
 GameObject:
@@ -1868,7 +1874,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &1584993916
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -1942,7 +1948,7 @@ Transform:
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1636228523
 GameObject:
@@ -2793,5 +2799,5 @@ Transform:
   - {fileID: 1445489836}
   - {fileID: 724232511}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

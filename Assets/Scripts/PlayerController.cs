@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     public float speed;
 
     public GameObject bullet;
+    public GameObject barrelRotator;
     public GameObject barrel;
     public GameObject hole;
     //public GameObject cameraRotator;
@@ -31,6 +32,10 @@ public class PlayerController : MonoBehaviour
     private float Fuel = 10.0f;
     private float BrunRate = 1.0f;
     public float hp = 10.0f;
+    private float startHP;
+    public float beginPower;
+    private float maxPower;
+    public float power;
     public string otherPlayer;
     private string playerXInput;
     private string playerYInput;
@@ -43,6 +48,9 @@ public class PlayerController : MonoBehaviour
         rbBullet = bullet.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         OwnTurn = false;
+        startHP = hp;
+        maxPower = beginPower;
+        power = maxPower/2;
         if (tag == "player_1")
         {
             otherPlayer = "player_2";
@@ -86,7 +94,14 @@ public class PlayerController : MonoBehaviour
                 roty -= RotateVertical * rotateSpeed;
 
                 roty = Mathf.Clamp(roty, -40.0f, 90.0f);
-                barrel.transform.eulerAngles = new Vector3(-roty, -rotx, 0.0f);
+                barrelRotator.transform.eulerAngles = new Vector3(-roty, -rotx, 0.0f);
+
+                float PosChangePower = 1.5f * Input.GetAxis("positivePowerInput");
+                float NegChangePower = 1.5f * Input.GetAxis("negativePowerInput");
+                if (power + PosChangePower - NegChangePower <= maxPower && power + PosChangePower - NegChangePower >= 0)
+                {
+                    power += PosChangePower - NegChangePower;
+                }
             }
 
             else if (shootMode == false)
@@ -144,6 +159,11 @@ public class PlayerController : MonoBehaviour
         {
             Gamecontroller.Winner_Declaration(otherPlayer);
         }
+        maxPower = beginPower * hp / startHP;
+        if (power > maxPower)
+        {
+            power = maxPower;
+        }
     }
 
     void Update()
@@ -154,9 +174,10 @@ public class PlayerController : MonoBehaviour
             {
                 if (Input.GetButtonDown(shootInput))
                 {
-                    Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
+                    GameObject shotBullet = Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
+                    shotBullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, power, 0));
                     shootMode = false;
-                    rb.constraints = RigidbodyConstraints.None;
+                    rb.constraints = RigidbodyConstraints.FreezePosition;
                     Gamecontroller.NextTurn();
                 }
                 if (Input.GetButtonDown(modeInput))
@@ -182,7 +203,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.tag == "Ground")
         {
             IsGrounded = true;
-            if (this.gameObject.tag == "Player_2" && TouchOnce == true)
+            if (gameObject.tag == "Player_2" && TouchOnce == true)
             {
                 OwnTurn = false;
                 rb.constraints = RigidbodyConstraints.FreezePosition;

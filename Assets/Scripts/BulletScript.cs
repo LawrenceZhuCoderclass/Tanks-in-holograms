@@ -14,15 +14,18 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-       transform.Translate(Vector3.forward * Time.deltaTime * 10);
+        if (transform.position.y < -100 || transform.position.x < -50 || transform.position.x > 50 || transform.position.z < -50 || transform.position.z > 50)
+        {
+            Destroy(gameObject);
+        }
     }
     void OnCollisionEnter(Collision collision)
     {
-        Instantiate(Explosion, this.transform.position, this.transform.rotation);
+        Instantiate(Explosion, transform.position, transform.rotation);
         /*if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
         {
             Debug.Log("Player hit!!!");
         }*/
-        Destroy(this.gameObject);
+        Destroy(gameObject);
     }
 }
