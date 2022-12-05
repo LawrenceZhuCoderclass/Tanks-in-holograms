@@ -13,6 +13,9 @@ public class GameController : MonoBehaviour
     private PlayerController player_2_script;
     private GameState gameState;
 
+    public playerText player_1_text;
+    public playerText player_2_text;
+
     public bool mirrorControls;
     public bool pyramidUsed;
     public bool controllerUsed;
@@ -35,7 +38,7 @@ public class GameController : MonoBehaviour
     void Start()
     {
         player_1_script = player_1.GetComponent<PlayerController>();
-        player_2_script = player_2.GetComponent<PlayerController>(); 
+        player_2_script = player_2.GetComponent<PlayerController>();
         currentturn = true;
         //true means player-1's turn, false means player_2's turn
         if (pyramidUsed)
@@ -83,15 +86,17 @@ public class GameController : MonoBehaviour
         {
             currentturn = false;
             player_2_script.shootMode = false;
-            player_1_script.OwnTurn = false;
+            player_2_text.shootMode = false;
             player_2_script.OwnTurn = true;
+            player_2_text.ownTurn = true;
         }
         else if (currentturn == false)
         {
             currentturn = true;
             player_1_script.shootMode = false;
+            player_1_text.shootMode = false;
             player_1_script.OwnTurn = true;
-            player_2_script.OwnTurn = false;
+            player_1_text.ownTurn = true;
         }
     }
 }

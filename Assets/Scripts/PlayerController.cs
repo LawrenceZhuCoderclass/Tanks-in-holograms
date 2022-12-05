@@ -29,10 +29,10 @@ public class PlayerController : MonoBehaviour
     public GameController Gamecontroller;
     public bool OwnTurn;
     private bool TouchOnce = true;
-    private float Fuel = 5.0f;
+    public float Fuel = 5.0f;
     private float BrunRate = 1.0f;
-    public float hp = 10.0f;
-    private float startHP;
+    public float hp;
+    public float startHP = 10.0f;
     public float beginPower;
     private float maxPower;
     public float power;
@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private string shootInput;
     private string posPowerInput;
     private string negPowerInput;
+    public playerText statsText;
 
     void Start()
     {
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
         rbBullet = bullet.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         OwnTurn = false;
-        startHP = hp;
+        hp = startHP;
         maxPower = beginPower;
         power = maxPower/2;
         if (tag == "player_1")
@@ -104,10 +105,8 @@ public class PlayerController : MonoBehaviour
 
                 float PosChangePower = 1.5f * Input.GetAxis(posPowerInput);
                 float NegChangePower = 1.5f * Input.GetAxis(negPowerInput);
-                if (power + PosChangePower - NegChangePower <= maxPower && power + PosChangePower - NegChangePower >= 0)
-                {
-                    power += PosChangePower - NegChangePower;
-                }
+                power += PosChangePower - NegChangePower;
+                power = Mathf.Clamp(power, 0, maxPower);
             }
 
             else if (shootMode == false)
@@ -147,6 +146,7 @@ public class PlayerController : MonoBehaviour
                 else
                 {
                     rb.constraints = RigidbodyConstraints.FreezePosition;
+                    Fuel = 0;
                 }
             }
         }
@@ -166,10 +166,7 @@ public class PlayerController : MonoBehaviour
             Gamecontroller.Winner_Declaration(otherPlayer);
         }
         maxPower = beginPower * hp / startHP;
-        if (power > maxPower)
-        {
-            power = maxPower;
-        }
+        power = Mathf.Clamp(power, 0, maxPower);
     }
 
     void Update()
@@ -185,12 +182,15 @@ public class PlayerController : MonoBehaviour
                     //shootMode = false;
                     rb.constraints = RigidbodyConstraints.FreezePosition;
                     OwnTurn = false;
+                    statsText.ownTurn = false;
+                    statsText.noText();
                     //Gamecontroller.NextTurn();
                 }
                 if (Input.GetButtonDown(modeInput))
                 {
                     shootMode = false;
                     rb.constraints = RigidbodyConstraints.None;
+                    statsText.shootMode = false;
                 }
             }
             else
@@ -201,6 +201,7 @@ public class PlayerController : MonoBehaviour
                     rb.constraints = RigidbodyConstraints.FreezePosition;
                     MoveHorizontal = 0.0f;
                     MoveVertical = 0.0f;
+                    statsText.shootMode = true;
                 }
             }
         }
@@ -213,11 +214,16 @@ public class PlayerController : MonoBehaviour
             if (gameObject.tag == "Player_2" && TouchOnce == true)
             {
                 OwnTurn = false;
+                statsText.ownTurn = false;
+                statsText.noText();
+                statsText.shootMode = false;
                 rb.constraints = RigidbodyConstraints.FreezePosition;
             }
             else if (TouchOnce == true)
             {
                 OwnTurn = true;
+                statsText.ownTurn = true;
+                statsText.shootMode = false;
                 rb.constraints = RigidbodyConstraints.None;
             }
             TouchOnce = false;
