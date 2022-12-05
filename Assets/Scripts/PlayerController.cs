@@ -29,7 +29,7 @@ public class PlayerController : MonoBehaviour
     public GameController Gamecontroller;
     public bool OwnTurn;
     private bool TouchOnce = true;
-    private float Fuel = 10.0f;
+    private float Fuel = 5.0f;
     private float BrunRate = 1.0f;
     public float hp = 10.0f;
     private float startHP;

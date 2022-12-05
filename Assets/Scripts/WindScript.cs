@@ -1,21 +1,40 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WindScript : MonoBehaviour
 {
-    public float windStrength;
+    private float windStrength;
     public float maxStartStrength;
     public float windStrengthChange;
+    public float realWindStrength;
+    public TextMeshPro windtext;
     void Start()
     {
-        //goede waardes voor de wind moeten worden gevonden
         windStrength = Random.Range(0, maxStartStrength);
+        //windStrength = 10;
         transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 90f);
+        realWindStrength = Mathf.Pow((windStrength*Mathf.Sqrt(5)), 2);
+        //transform.localScale = new Vector3(realWindStrength * 0.1f/5f, realWindStrength * 0.04f/5f, realWindStrength * 0.2f/5f);
+        windtext.SetText(((int)(realWindStrength/5*120)).ToString());
     }
     public void changeWind()
     {
         windStrength += Random.Range(-windStrengthChange, windStrengthChange);
         transform.rotation = Quaternion.Euler(0, transform.rotation.y + Random.Range(-45f, 45f), 90f);
+
+        if (windStrength > 1)
+        {
+            windStrength = 1 + Random.Range(-0.05f, 0);
+        }
+        else if (windStrength < 0)
+        {
+            windStrength = -windStrength;
+            transform.rotation = Quaternion.Euler(0, transform.rotation.y + 180f, 90f);
+        }
+        realWindStrength = Mathf.Pow((windStrength * Mathf.Sqrt(5)), 2);
+        //transform.localScale = new Vector3(realWindStrength * 0.1f / 5f, realWindStrength * 0.04f / 5f, realWindStrength * 0.2f / 5f);
+        windtext.SetText(((int)(realWindStrength / 5 * 120)).ToString());
     }
 }

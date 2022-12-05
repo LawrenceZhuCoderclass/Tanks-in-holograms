@@ -20,7 +20,7 @@ public class BulletScript : MonoBehaviour
 
     void Update()
     {
-        rb.AddForce(-windObject[0].transform.forward * windObject[0].GetComponent<WindScript>().windStrength);
+        rb.AddForce(-windObject[0].transform.forward * windObject[0].GetComponent<WindScript>().realWindStrength);
         if (transform.position.y < -100 || transform.position.x < -50 || transform.position.x > 50 || transform.position.z < -50 || transform.position.z > 50)
         {
             Gamecontroller.NextTurn();
