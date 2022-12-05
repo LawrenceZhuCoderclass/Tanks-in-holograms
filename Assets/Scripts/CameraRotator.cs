@@ -16,6 +16,7 @@ public class CameraRotator : MonoBehaviour
     private float startRotation;
     public GameObject player_1_text;
     public GameObject player_2_text;
+    public bool pyramidCamera;
 
     // Start is called before the first frame update
     void Start()
@@ -39,9 +40,13 @@ public class CameraRotator : MonoBehaviour
     {
         float RotateHorizontal = Input.GetAxis(cameraInputY);
         roty -= RotateHorizontal * rotateSpeed;
-        float RotateVertical = Input.GetAxis(cameraInputX);
-        rotx -= RotateVertical * rotateSpeed;
-        rotx = Mathf.Clamp(rotx, -30, 45);
+        if (!pyramidCamera)
+        {
+            float RotateVertical = Input.GetAxis(cameraInputX);
+            rotx -= RotateVertical * rotateSpeed;
+            rotx = Mathf.Clamp(rotx, -30, 45);
+        }
+        else { rotx = 0.0f; }
 
         transform.eulerAngles = new Vector3(rotx, roty, 0.0f);
         player1.cameraAngle = (transform.eulerAngles.y-startRotation) * Mathf.Deg2Rad;
