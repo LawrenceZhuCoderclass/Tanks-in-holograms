@@ -43,6 +43,7 @@ public class PlayerController : MonoBehaviour
     private string shootInput;
     private string posPowerInput;
     private string negPowerInput;
+    private float mirrorcontrol;
     public playerText statsText;
 
     void Start()
@@ -81,6 +82,8 @@ public class PlayerController : MonoBehaviour
             posPowerInput = "positivePowerInput";
             negPowerInput = "negativePowerInput";
         }
+        if (Gamecontroller.mirrorControls) { mirrorcontrol = -1f; }
+        else { mirrorcontrol = 1f; }
     }
 
 
@@ -95,7 +98,7 @@ public class PlayerController : MonoBehaviour
                 //    shootMode = false;
                 //    rb.constraints = RigidbodyConstraints.None;
                 //}
-                float RotateHorizontal = Input.GetAxis(playerXInput);
+                float RotateHorizontal = mirrorcontrol * Input.GetAxis(playerXInput);
                 float RotateVertical = Input.GetAxis(playerYInput);
                 rotx -= RotateHorizontal * rotateSpeed;
                 roty -= RotateVertical * rotateSpeed;
@@ -111,8 +114,9 @@ public class PlayerController : MonoBehaviour
 
             else if (shootMode == false)
             {
-                if (Gamecontroller.mirrorControls) { MoveHorizontal = -Input.GetAxis(playerXInput); }
-                else { MoveHorizontal = Input.GetAxis(playerXInput); }
+                //if (Gamecontroller.mirrorControls) { MoveHorizontal = -Input.GetAxis(playerXInput); }
+                //else { MoveHorizontal = Input.GetAxis(playerXInput); }
+                MoveHorizontal = mirrorcontrol * Input.GetAxis(playerXInput);
                 MoveVertical = Input.GetAxis(playerYInput);
 
                 if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
