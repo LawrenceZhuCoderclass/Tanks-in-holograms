@@ -54,13 +54,13 @@ public class PlayerController : MonoBehaviour
         hp = startHP;
         maxPower = beginPower;
         power = maxPower/2;
-        if (tag == "player_1")
+        if (tag == "Player_1")
         {
             otherPlayer = "player_2";
         }
         else 
         {
-            otherPlayer = "Player_1";
+            otherPlayer = "player_1";
         }
 
         if (Gamecontroller.controllerUsed)
@@ -160,7 +160,6 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage(float damage)
     {
         hp = hp - damage;
-        hp = Mathf.Clamp(hp, 0, Mathf.Infinity);
         if (hp <= 0)
         {
             Gamecontroller.Winner_Declaration(otherPlayer);

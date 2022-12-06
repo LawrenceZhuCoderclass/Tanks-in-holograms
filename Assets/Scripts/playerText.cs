@@ -19,6 +19,8 @@ public class playerText : MonoBehaviour
     private int percentFuel;
     public bool ownTurn;
     public bool shootMode;
+    public bool dead;
+    public bool winner;
     private TextMeshPro textMesh;
 
     //public GameController gameController;
@@ -48,7 +50,15 @@ public class playerText : MonoBehaviour
 
         currentHP = transform.GetComponentInParent<PlayerController>().hp;
         percentHP = (int)(currentHP / startHP * 100);
-        if (ownTurn && shootMode)
+        if (winner)
+        {
+            textMesh.SetText("Winner!");
+        }
+        else if (dead)
+        {
+            textMesh.SetText("<br>");
+        }
+        else if (ownTurn && shootMode)
         {
             currentPow = transform.GetComponentInParent<PlayerController>().power;
             percentPow = (int)(currentPow / startPow * 100);

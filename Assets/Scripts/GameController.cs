@@ -75,7 +75,17 @@ public class GameController : MonoBehaviour
     {
         Debug.Log(name + "is the winner!!!");
         gameState = GameState.End;
-        Time.timeScale = 0;
+        //Time.timeScale = 0;
+        if (name == "player_1")
+        {
+            player_1_text.winner = true;
+            player_2_text.dead = true;
+        }
+        else if (name == "player_2")
+        {
+            player_2_text.winner = true;
+            player_1_text.dead = true;
+        }
         player_1_script.enabled = false;
         player_2_script.enabled = false;
     }
