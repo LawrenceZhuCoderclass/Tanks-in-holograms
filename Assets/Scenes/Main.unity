@@ -1850,8 +1850,8 @@ MonoBehaviour:
   player_2: {fileID: 1445489830}
   player_1_text: {fileID: 1933209867}
   player_2_text: {fileID: 1785699793}
-  mirrorControls: 0
-  pyramidUsed: 0
+  mirrorControls: 1
+  pyramidUsed: 1
   controllerUsed: 0
   pyramidDisplay: {fileID: 1060631660}
   normalCamera: {fileID: 521849584}
@@ -2072,7 +2072,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1759083484}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 10, z: 0}
+  m_LocalPosition: {x: 0, y: 20, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1478585881}
