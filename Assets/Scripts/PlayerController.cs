@@ -245,4 +245,10 @@ public class PlayerController : MonoBehaviour
         maxPower = beginPower * hp / startHP;
         power = Mathf.Clamp(power, 0, maxPower);
     }
+    //--------------------------------------Change playerstate--------------------------------------
+    public void ChangePlayerState(string newState)
+    {
+        if (newState == "Shooting") { playerState = PlayerState.Shooting; }
+        else if (newState == "Driving") { playerState = PlayerState.Driving; }
+    }
 }

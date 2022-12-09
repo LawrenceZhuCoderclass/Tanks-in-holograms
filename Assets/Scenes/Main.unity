@@ -614,20 +614,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootMode: 0
-  speed: 3
-  bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
-  barrelRotator: {fileID: 115974992}
-  barrel: {fileID: 160660437}
-  hole: {fileID: 1516061788}
-  rotateSpeed: 5
-  cameraAngle: 0
-  Gamecontroller: {fileID: 1566331076}
   OwnTurn: 1
+  speed: 3
   Fuel: 5
   hp: 5
   startHP: 5
   beginPower: 1000
   power: 0
+  rotateSpeed: 5
+  cameraAngle: 0
+  bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
+  barrelRotator: {fileID: 115974992}
+  barrel: {fileID: 160660437}
+  hole: {fileID: 1516061788}
+  Gamecontroller: {fileID: 1566331076}
   otherPlayer: 
   statsText: {fileID: 1933209867}
 --- !u!54 &389404034
@@ -1584,20 +1584,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   shootMode: 0
-  speed: 3
-  bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
-  barrelRotator: {fileID: 724232510}
-  barrel: {fileID: 955843762}
-  hole: {fileID: 235548194}
-  rotateSpeed: 5
-  cameraAngle: 0
-  Gamecontroller: {fileID: 1566331076}
   OwnTurn: 1
+  speed: 3
   Fuel: 5
   hp: 5
   startHP: 5
   beginPower: 1000
   power: 0
+  rotateSpeed: 5
+  cameraAngle: 0
+  bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
+  barrelRotator: {fileID: 724232510}
+  barrel: {fileID: 955843762}
+  hole: {fileID: 235548194}
+  Gamecontroller: {fileID: 1566331076}
   otherPlayer: 
   statsText: {fileID: 1785699793}
 --- !u!54 &1445489832
@@ -1850,8 +1850,8 @@ MonoBehaviour:
   player_2: {fileID: 1445489830}
   player_1_text: {fileID: 1933209867}
   player_2_text: {fileID: 1785699793}
-  mirrorControls: 1
-  pyramidUsed: 1
+  mirrorControls: 0
+  pyramidUsed: 0
   controllerUsed: 0
   pyramidDisplay: {fileID: 1060631660}
   normalCamera: {fileID: 521849584}

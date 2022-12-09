@@ -95,7 +95,7 @@ public class GameController : MonoBehaviour
         if (currentturn == true)
         {
             currentturn = false;
-            player_2_script.shootMode = false;
+            player_2_script.ChangePlayerState("Driving");
             player_2_text.shootMode = false;
             player_2_script.OwnTurn = true;
             player_2_text.ownTurn = true;
@@ -103,7 +103,7 @@ public class GameController : MonoBehaviour
         else if (currentturn == false)
         {
             currentturn = true;
-            player_1_script.shootMode = false;
+            player_1_script.ChangePlayerState("Driving");
             player_1_text.shootMode = false;
             player_1_script.OwnTurn = true;
             player_1_text.ownTurn = true;
