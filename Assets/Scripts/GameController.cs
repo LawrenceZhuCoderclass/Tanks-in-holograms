@@ -8,9 +8,14 @@ public class GameController : MonoBehaviour
 {
     public GameObject player_1;
     public GameObject player_2;
-
+    public GameObject StartText;
+    public GameObject OptionsText;
+    public GameObject PauseText;
+    public GameObject Field;
+    
     private PlayerController player_1_script;
     private PlayerController player_2_script;
+    
     private GameState gameState;
 
     public playerText player_1_text;
@@ -29,9 +34,10 @@ public class GameController : MonoBehaviour
 
     public enum GameState
     {
-        //Start,
+        Start,
+        Options,
         Playing,
-        //Paused,
+        Paused,
         End
     }
 
@@ -57,8 +63,54 @@ public class GameController : MonoBehaviour
     {
         switch(gameState)
         {
+            case GameState.Start:
+                if (Input.GetKeyDown("space"))
+                {
+                    gameState = GameState.Playing;
+                    StartText.SetActive(false);
+                    Field.SetActive(true);
+                }
+                else if (Input.GetKeyDown("o"))
+                {
+                    gameState = GameState.Options;
+                    StartText.SetActive(false);
+                    OptionsText.SetActive(true);
+                }
+                else if (Input.GetKeyDown("q"))
+                {
+                    gameState = GameState.End;
+                }
+                break;
+            case GameState.Options:
+                if (Input.GetKeyDown("e"))
+                {
+                    gameState = GameState.Start;
+                    OptionsText.SetActive(false);
+                    StartText.SetActive(true);
+                }
+                break;
+
             case GameState.Playing:
-                // Here comes the code where you check if something is clicked for the pause mode
+                Time.timeScale = 1;
+                if (Input.GetKeyDown(KeyCode.Escape))
+                {
+                    gameState = GameState.Paused;
+                    Field.SetActive(false);
+                    PauseText.SetActive(true);
+                }
+                break;
+            case GameState.Paused:
+                if(Input.GetKeyDown(KeyCode.Escape))
+                {
+                    gameState = GameState.Playing;
+                    PauseText.SetActive(false);
+                    Field.SetActive(true);
+                }
+                if(Input.GetKeyDown("q"))
+                {
+                    gameState = GameState.End;
+                    PauseText.SetActive(false);
+                }
                 break;
             case GameState.End:
                 if (Input.GetKeyDown("r"))
