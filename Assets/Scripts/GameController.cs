@@ -47,16 +47,7 @@ public class GameController : MonoBehaviour
         player_2_script = player_2.GetComponent<PlayerController>();
         currentturn = true;
         //true means player-1's turn, false means player_2's turn
-        if (pyramidUsed)
-        {
-            pyramidDisplay.SetActive(true);
-            normalCamera.SetActive(false);
-        }
-        else
-        {
-            normalCamera.SetActive(true);
-            pyramidDisplay.SetActive(false);
-        }
+
     }
 
     void Update()
@@ -69,6 +60,16 @@ public class GameController : MonoBehaviour
                     gameState = GameState.Playing;
                     StartText.SetActive(false);
                     Field.SetActive(true);
+                    if (pyramidUsed)
+                    {
+                        pyramidDisplay.SetActive(true);
+                        normalCamera.SetActive(false);
+                    }
+                    else
+                    {
+                        normalCamera.SetActive(true);
+                        pyramidDisplay.SetActive(false);
+                    }
                 }
                 else if (Input.GetKeyDown("o"))
                 {
@@ -87,6 +88,28 @@ public class GameController : MonoBehaviour
                     gameState = GameState.Start;
                     OptionsText.SetActive(false);
                     StartText.SetActive(true);
+                }
+                if (Input.GetKeyDown("h"))
+                {
+                    mirrorControls = true;
+                    //controls to that of the holofil
+                }
+                else if (Input.GetKeyDown("p"))
+                {
+                    mirrorControls = true;
+                    pyramidUsed = true;
+                    //controls to that of the pepper's cone
+                }
+                else if (Input.GetKeyDown("n"))
+                {
+                    mirrorControls = false;
+                    pyramidUsed = false;
+                    controllerUsed = false;
+                    //return to the normal controls
+                }
+                else if (Input.GetKeyDown("c"))
+                {
+                    controllerUsed = true;
                 }
                 break;
 
