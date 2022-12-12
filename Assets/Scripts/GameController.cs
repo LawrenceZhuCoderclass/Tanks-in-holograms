@@ -76,7 +76,7 @@ public class GameController : MonoBehaviour
                     StartText.SetActive(false);
                     OptionsText.SetActive(true);
                 }
-                else if (Input.GetKeyDown("q"))
+                else if (Input.GetKeyDown("e"))
                 {
                     gameState = GameState.End;
                 }
@@ -106,7 +106,7 @@ public class GameController : MonoBehaviour
                     PauseText.SetActive(false);
                     Field.SetActive(true);
                 }
-                if(Input.GetKeyDown("q"))
+                if(Input.GetKeyDown("e"))
                 {
                     gameState = GameState.End;
                     PauseText.SetActive(false);
