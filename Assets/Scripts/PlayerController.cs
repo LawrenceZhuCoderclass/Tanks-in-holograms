@@ -174,7 +174,7 @@ public class PlayerController : MonoBehaviour
 
         if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
         {
-            rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
         }
         else
         {
@@ -195,7 +195,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             Fuel = 0;
         }
     }
