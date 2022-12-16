@@ -31,14 +31,45 @@ public class TileGeneration : MonoBehaviour {
     int tileDepth = (int)Mathf.Sqrt (meshVertices.Length);
     int tileWidth = tileDepth;
     float[,] heightMap = this.noiseMapGeneration.GenerateNoiseMap (tileDepth, tileWidth, this.mapScale);
-    //Texture2D tileTexture = BuildTexture (heightMap);
+    Texture2D tileTexture = BuildTexture (heightMap);
     int chosenMaterial = Random.Range(0, 9);
     this.tileRenderer.material = GroundMaterial[chosenMaterial];
     //heightmultiplier veranderen op basis van het material
-    //switch (chosenMaterial)
-    //{
-        
-    //}
+    switch (chosenMaterial)
+    {
+            case 0:
+                heightMultiplier = 0;
+                break;
+            case 1:
+                heightMultiplier = Random.Range(0f, 1.0f);
+                break;
+            case 2:
+                heightMultiplier = Random.Range(1.0f, 2.0f);
+                break;
+            case 3:
+                heightMultiplier = Random.Range(1.0f, 2.0f);
+                break;
+            case 4:
+                heightMultiplier = Random.Range(1.0f, 2.0f);
+                break;
+            case 5:
+                heightMultiplier = Random.Range(1.0f, 2.0f);
+                break;
+            case 6:
+                heightMultiplier = Random.Range(2.0f, 3.0f);
+                break;
+            case 7:
+                heightMultiplier = Random.Range(0f, 2.0f);
+                break;
+            case 8:
+                heightMultiplier = Random.Range(3.0f, 5.0f);
+                break;
+            case 9:
+                heightMultiplier = Random.Range(1.0f, 2.0f);
+                break;
+            default:
+                break;
+    }
     UpdateMeshVertices(heightMap);
   }
   private Texture2D BuildTexture(float[,] heightMap) {
