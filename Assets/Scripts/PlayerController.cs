@@ -7,6 +7,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private Rigidbody rbBullet;
 
+    public AudioSource DriveSound;
+
     public bool shootMode = false;
     public bool OwnTurn;
     private bool TouchOnce = true;
@@ -133,6 +135,7 @@ public class PlayerController : MonoBehaviour
                         MoveHorizontal = 0.0f;
                         MoveVertical = 0.0f;
                         statsText.shootMode = true;
+                        DriveSound.loop = false;
                     }
                     break;
                 case PlayerState.Shooting:
@@ -175,6 +178,7 @@ public class PlayerController : MonoBehaviour
         if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
+            DriveSound.Stop();
         }
         else
         {
@@ -183,6 +187,12 @@ public class PlayerController : MonoBehaviour
         if (MoveHorizontal != 0.0f || MoveVertical != 0.0f)
         {
             Fuel -= BrunRate * Time.deltaTime;
+            if (!DriveSound.isPlaying && Fuel > 0.0f)
+            {
+                DriveSound.loop = true;
+                DriveSound.Play();
+            }
+
         }
 
         if (Fuel > 0.0f)
@@ -196,6 +206,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
+            DriveSound.Stop();
             Fuel = 0;
         }
     }
