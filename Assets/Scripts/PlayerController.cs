@@ -8,6 +8,8 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rbBullet;
 
     public AudioSource DriveSound;
+    public AudioSource TurnSound;
+    public AudioSource ChangeSound;
 
     public bool shootMode = false;
     public bool OwnTurn;
@@ -131,6 +133,7 @@ public class PlayerController : MonoBehaviour
                     if (Input.GetButtonDown(modeInput))
                     {
                         playerState = PlayerState.Shooting;
+                        ChangeSound.Play();
                         rb.constraints = RigidbodyConstraints.FreezePosition;
                         MoveHorizontal = 0.0f;
                         MoveVertical = 0.0f;
@@ -189,7 +192,6 @@ public class PlayerController : MonoBehaviour
             Fuel -= BrunRate * Time.deltaTime;
             if (!DriveSound.isPlaying && Fuel > 0.0f)
             {
-                DriveSound.loop = true;
                 DriveSound.Play();
             }
 
@@ -225,6 +227,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetButtonDown(modeInput))
         {
             playerState = PlayerState.Driving;
+            ChangeSound.Play();
             rb.constraints = RigidbodyConstraints.None;
             statsText.shootMode = false;
         }
@@ -234,9 +237,21 @@ public class PlayerController : MonoBehaviour
     {
         float RotateHorizontal = mirrorcontrol * Input.GetAxis(playerXInput);
         float RotateVertical = Input.GetAxis(playerYInput);
+        //Debug.Log(RotateVertical);
+       // Debug.Log(RotateHorizontal);
         rotx -= RotateHorizontal * rotateSpeed;
         roty -= RotateVertical * rotateSpeed;
-
+        if (RotateHorizontal != 0.0f || RotateVertical != 0.0f)
+        {
+            if (!TurnSound.isPlaying)
+            {
+                TurnSound.Play();
+            }
+        }
+        else if (RotateHorizontal == 0.0f && MoveVertical == 0.0f)
+        {
+            TurnSound.Stop();
+        }
         roty = Mathf.Clamp(roty, -40.0f, 90.0f);
         barrelRotator.transform.eulerAngles = new Vector3(-roty, -rotx, 0.0f);
 
