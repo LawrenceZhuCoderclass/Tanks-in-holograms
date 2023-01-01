@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public AudioSource DriveSound;
     public AudioSource TurnSound;
     public AudioSource ChangeSound;
+    public AudioSource ShotSound;
 
     public bool shootMode = false;
     public bool OwnTurn;
@@ -217,6 +218,7 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetButtonDown(shootInput))
         {
+            ShotSound.Play();
             GameObject shotBullet = Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
             shotBullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, power, 0));
             rb.constraints = RigidbodyConstraints.FreezePosition;

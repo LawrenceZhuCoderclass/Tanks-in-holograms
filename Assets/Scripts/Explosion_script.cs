@@ -5,17 +5,17 @@ using UnityEngine;
 public class Explosion_script : MonoBehaviour
 {
     private SphereCollider collider;
-
+    private AudioSource BoomSound;
     void Start()
     {
         collider = GetComponent<SphereCollider>();
-
+        BoomSound = GetComponent<AudioSource>();
     }
 
     void Update()
     {
         collider.radius += 0.2f;
-        if (collider.radius >= 1.6f)
+        if (collider.radius >= 1.6f && !BoomSound.isPlaying)
         {
             Destroy(this.gameObject);
         }
