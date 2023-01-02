@@ -22,8 +22,6 @@ public class TileGeneration : MonoBehaviour {
   void Start() {
     mapScale = Random.Range(1.0f, 6.0f);
     heightMultiplier = Random.Range(1.0f, 2.0f);
-    Debug.Log(mapScale);
-    Debug.Log(heightMultiplier);
     GenerateTile ();
   }
   void GenerateTile() {

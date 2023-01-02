@@ -32,6 +32,8 @@ public class GameController : MonoBehaviour
 
     public WindScript windController;
 
+    private AudioSource Select;
+
     public enum GameState
     {
         Start,
@@ -45,6 +47,7 @@ public class GameController : MonoBehaviour
     {
         player_1_script = player_1.GetComponent<PlayerController>();
         player_2_script = player_2.GetComponent<PlayerController>();
+        Select = GetComponent<AudioSource>();
         currentturn = true;
         //true means player-1's turn, false means player_2's turn
 
@@ -74,6 +77,7 @@ public class GameController : MonoBehaviour
                 else if (Input.GetKeyDown("o"))
                 {
                     gameState = GameState.Options;
+                    Select.Play();
                     StartText.SetActive(false);
                     OptionsText.SetActive(true);
                 }
@@ -85,23 +89,27 @@ public class GameController : MonoBehaviour
             case GameState.Options:
                 if (Input.GetKeyDown("e"))
                 {
+                    Select.Play();
                     gameState = GameState.Start;
                     OptionsText.SetActive(false);
                     StartText.SetActive(true);
                 }
                 if (Input.GetKeyDown("h"))
                 {
+                    Select.Play();
                     mirrorControls = true;
                     //controls to that of the holofil
                 }
                 else if (Input.GetKeyDown("p"))
                 {
+                    Select.Play();
                     mirrorControls = true;
                     pyramidUsed = true;
                     //controls to that of the pepper's cone
                 }
                 else if (Input.GetKeyDown("n"))
                 {
+                    Select.Play();
                     mirrorControls = false;
                     pyramidUsed = false;
                     controllerUsed = false;
@@ -109,6 +117,7 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("c"))
                 {
+                    Select.Play();
                     controllerUsed = true;
                 }
                 break;
