@@ -183,6 +183,8 @@ public class GameController : MonoBehaviour
             player_2_text.shootMode = false;
             player_2_script.OwnTurn = true;
             player_2_text.ownTurn = true;
+            //player_2_script.MoveHorizontal = 0.0f;
+            //player_2_script.MoveVertical = 0.0f;
         }
         else if (currentturn == false)
         {
@@ -191,6 +193,8 @@ public class GameController : MonoBehaviour
             player_1_text.shootMode = false;
             player_1_script.OwnTurn = true;
             player_1_text.ownTurn = true;
+            //player_1_script.MoveHorizontal = 0.0f;
+            //player_1_script.MoveVertical = 0.0f;
         }
     }
 }

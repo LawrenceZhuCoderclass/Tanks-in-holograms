@@ -29,8 +29,8 @@ public class PlayerController : MonoBehaviour
     public float rotateSpeed = 5.0f;
     private float rotx = 0.0f;
     private float roty = 0.0f;
-    private float MoveHorizontal;
-    private float MoveVertical;
+    public float MoveHorizontal;
+    public float MoveVertical;
     private float CorrectMoveX;
     private float CorrectMoveZ;
     public float cameraAngle;
@@ -135,7 +135,7 @@ public class PlayerController : MonoBehaviour
                     {
                         playerState = PlayerState.Shooting;
                         ChangeSound.Play();
-                        rb.constraints = RigidbodyConstraints.FreezePosition;
+                        rb.constraints = RigidbodyConstraints.FreezeAll;
                         MoveHorizontal = 0.0f;
                         MoveVertical = 0.0f;
                         statsText.shootMode = true;
@@ -147,6 +147,10 @@ public class PlayerController : MonoBehaviour
                     break;
 
             }
+        }
+        if (gameObject.tag == "Player_2")
+        {
+            Debug.Log(CorrectMoveX + ", " + CorrectMoveZ);
         }
     }
     //--------------------------------------Touching the Ground Function--------------------------------------
@@ -161,7 +165,7 @@ public class PlayerController : MonoBehaviour
                 statsText.ownTurn = false;
                 statsText.noText();
                 statsText.shootMode = false;
-                rb.constraints = RigidbodyConstraints.FreezePosition;
+                rb.constraints = RigidbodyConstraints.FreezeAll;
             }
             else if (TouchOnce == true)
             {
@@ -178,7 +182,6 @@ public class PlayerController : MonoBehaviour
     {
         MoveHorizontal = mirrorcontrol * Input.GetAxis(playerXInput);
         MoveVertical = Input.GetAxis(playerYInput);
-
         if (MoveHorizontal == 0.0f && MoveVertical == 0.0f && IsGrounded == true)
         {
             rb.constraints = RigidbodyConstraints.FreezeAll;
@@ -212,6 +215,10 @@ public class PlayerController : MonoBehaviour
             DriveSound.Stop();
             Fuel = 0;
         }
+        Vector3 boundaries = transform.position;
+        boundaries.x = Mathf.Clamp(boundaries.x, -20, 20);
+        boundaries.z = Mathf.Clamp(boundaries.z, -20, 20);
+        transform.position = boundaries;
     }
     //--------------------------------------Shooting Function--------------------------------------
     void ShootBullet()
@@ -221,7 +228,7 @@ public class PlayerController : MonoBehaviour
             ShotSound.Play();
             GameObject shotBullet = Instantiate(bullet, hole.transform.position, barrel.transform.rotation);
             shotBullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(0, power, 0));
-            rb.constraints = RigidbodyConstraints.FreezePosition;
+            rb.constraints = RigidbodyConstraints.FreezeAll;
             OwnTurn = false;
             statsText.ownTurn = false;
             statsText.noText();

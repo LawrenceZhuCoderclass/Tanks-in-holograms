@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -999,6 +999,8 @@ MonoBehaviour:
   beginPower: 1000
   power: 0
   rotateSpeed: 5
+  MoveHorizontal: 0
+  MoveVertical: 0
   cameraAngle: 0
   bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
   barrelRotator: {fileID: 115974992}
@@ -2989,6 +2991,8 @@ MonoBehaviour:
   beginPower: 1000
   power: 0
   rotateSpeed: 5
+  MoveHorizontal: 0
+  MoveVertical: 0
   cameraAngle: 0
   bullet: {fileID: 7404006316344638553, guid: 2da170d76181fa34bb62e18db9ad1f2c, type: 3}
   barrelRotator: {fileID: 724232510}
@@ -3963,7 +3967,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1584993915}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 5, y: 1, z: 5}
   m_Children: []

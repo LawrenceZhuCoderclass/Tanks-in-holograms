@@ -13,7 +13,7 @@ public class BulletScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         
-        //kan waarschijnlijk beter geschreven (de wind vinden)
+        //kan waarschijnlijk beter geschreven
         windObject = GameObject.FindGameObjectsWithTag("Wind");
         Gamecontroller = Object.FindObjectOfType<GameController>();
     }
@@ -29,7 +29,7 @@ public class BulletScript : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        Gamecontroller.NextTurn();
+        //Gamecontroller.NextTurn(); (now placed in explosion script, because the next bullet would collide with the explosion if shot too early)
         Instantiate(Explosion, transform.position, transform.rotation);
         /*if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
         {

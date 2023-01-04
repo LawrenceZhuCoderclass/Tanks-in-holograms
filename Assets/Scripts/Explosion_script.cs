@@ -6,21 +6,39 @@ public class Explosion_script : MonoBehaviour
 {
     private SphereCollider collider;
     private AudioSource BoomSound;
+    private GameController Gamecontroller;
+    private bool nextTurnStarted;
+
     void Start()
     {
         collider = GetComponent<SphereCollider>();
         BoomSound = GetComponent<AudioSource>();
+        Gamecontroller = Object.FindObjectOfType<GameController>();
+        nextTurnStarted = false;
     }
 
-    void Update()
+    void FixedUpdate()
     {
         collider.radius += 0.2f;
-        if (collider.radius >= 1.6f && !BoomSound.isPlaying)
+        if (collider.radius >= 1.6f)
+        {
+            if (!nextTurnStarted)
+            {
+                Gamecontroller.NextTurn();
+                nextTurnStarted = true;
+            }
+            collider.enabled = false;
+        }
+    }
+
+    private void Update()
+    {
+        if (!collider.enabled && !BoomSound.isPlaying)
         {
             Destroy(this.gameObject);
         }
-
     }
+
     void OnCollisionEnter (Collision collision)
     {
         //Debug.Log("Hit");
