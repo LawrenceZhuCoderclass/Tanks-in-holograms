@@ -140,15 +140,14 @@ public class GameController : MonoBehaviour
                 }
                 if(Input.GetKeyDown("e"))
                 {
-                    gameState = GameState.End;
-                    PauseText.SetActive(false);
+                    gameState = GameState.Start;
+                    SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 break;
             case GameState.End:
                 if (Input.GetKeyDown("r"))
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                    Debug.Log(Time.timeScale);
                     Time.timeScale = 1;
                 }
                 break;
