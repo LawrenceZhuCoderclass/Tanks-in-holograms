@@ -6,6 +6,7 @@ public class Text_Script : MonoBehaviour
 {
     private Rigidbody rb;
     private Vector3 eulerAngleVelocity;
+    public GameController gameController;
 
     void Start()
     {
@@ -15,8 +16,18 @@ public class Text_Script : MonoBehaviour
 
     void FixedUpdate()
     {
-        Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
-        rb.MoveRotation(rb.rotation * deltaRotation);
+        if (gameController.pyramidUsed)
+        {
+            Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
+            rb.MoveRotation(rb.rotation * deltaRotation);
+        }
+        else if (gameController.mirrorControls)
+        {
+            transform.eulerAngles = new Vector3(-30.0f, 180f, 0.0f);
+        }
+        else
+        {
+            transform.eulerAngles = new Vector3(30.0f, 0.0f, 0.0f);
+        }
     }
-
 }

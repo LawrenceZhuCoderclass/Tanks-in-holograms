@@ -148,10 +148,6 @@ public class PlayerController : MonoBehaviour
 
             }
         }
-        if (gameObject.tag == "Player_2")
-        {
-            Debug.Log(CorrectMoveX + ", " + CorrectMoveZ);
-        }
     }
     //--------------------------------------Touching the Ground Function--------------------------------------
     void OnCollisionEnter(Collision collision)

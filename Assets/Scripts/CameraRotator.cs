@@ -23,9 +23,10 @@ public class CameraRotator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mirrormultiplier = 1f;
+        //mirrormultiplier = 1f;
         pyramidtextrotation = 0f;
         startRotation = transform.eulerAngles.y;
+        //mirrormultiplier = 0.0f;
         //rb = GetComponent<Rigidbody>();
         if (Gamecontroller.controllerUsed)
         {
@@ -37,10 +38,6 @@ public class CameraRotator : MonoBehaviour
             cameraInputY = "HorizontalCamera";
             cameraInputX = "VerticalCamera";
         }
-        if (Gamecontroller.mirrorControls)
-        {
-            mirrormultiplier = -1f;
-        }
         if (Gamecontroller.mirrorControls && !Gamecontroller.pyramidUsed)
         {
             this.transform.position = new Vector3(transform.position.x, transform.position.y + 7f, transform.position.z);
@@ -49,7 +46,7 @@ public class CameraRotator : MonoBehaviour
         else if (Gamecontroller.pyramidUsed)
         {
             pyramidtextrotation = -90f;
-}
+        }
     }
 
     // Update is called once per frame
@@ -70,5 +67,17 @@ public class CameraRotator : MonoBehaviour
         player2.cameraAngle = (transform.eulerAngles.y-startRotation) * Mathf.Deg2Rad;
         player_1_text.transform.eulerAngles = new Vector3(0.0f, roty - 90f + pyramidtextrotation + mirrormultiplier * 90f, 0.0f);
         player_2_text.transform.eulerAngles = new Vector3(0.0f, roty - 90f + pyramidtextrotation + mirrormultiplier * 90f, 0.0f);
+    }
+
+    public void startGame()
+    {
+        if (Gamecontroller.mirrorControls)
+        {
+            mirrormultiplier = -1f;
+        }
+        else
+        {
+            mirrormultiplier = 1f;
+        }
     }
 }

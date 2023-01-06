@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -791,6 +791,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7aeff40043938b469ae3f107323e8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1566331076}
 --- !u!54 &286099034
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -826,7 +827,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Press "escape" to continue
+  m_text: 'Pause Mode
+
+    Press "esc" to continue
 
     press "e" to exit '
   m_isRightToLeft: 0
@@ -2109,7 +2112,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 733018163}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 5, z: 5}
+  m_LocalPosition: {x: 0, y: 0, z: 20}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 808101600}
@@ -2313,6 +2316,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7aeff40043938b469ae3f107323e8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1566331076}
 --- !u!54 &808101602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3446,6 +3450,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7aeff40043938b469ae3f107323e8cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameController: {fileID: 1566331076}
 --- !u!54 &1464879235
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3483,17 +3488,16 @@ MonoBehaviour:
       m_Calls: []
   m_text: 'Options
 
-    Press "h" for holofil controls
+    Press "H" for holofil mode
 
-    press "p" for pepper''s
-    cone controls
+    Press "P" for pyramid mode
 
-    press "c" if controllers are connected
+    Press
+    "C" to use controller
 
-    Press "n" for
-    normal controls
+    Press "N" to reset
 
-    Press "e" to return to start'
+    Press "E" to return to start'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: b7c50ee184922614e8234a5a22d57bcf, type: 2}
   m_sharedMaterial: {fileID: 4222528049413680799, guid: b7c50ee184922614e8234a5a22d57bcf,
@@ -3769,7 +3773,9 @@ MonoBehaviour:
   controllerUsed: 0
   pyramidDisplay: {fileID: 1060631660}
   normalCamera: {fileID: 521849584}
+  pyramidCameraRotator: {fileID: 1759083484}
   windController: {fileID: 1799431547}
+  mainCamera: {fileID: 963194227}
 --- !u!4 &1566331077
 Transform:
   m_ObjectHideFlags: 0

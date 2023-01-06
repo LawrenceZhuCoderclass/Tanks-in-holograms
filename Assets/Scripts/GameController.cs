@@ -30,9 +30,13 @@ public class GameController : MonoBehaviour
     public GameObject pyramidDisplay;
     public GameObject normalCamera;
 
+    public GameObject pyramidCameraRotator;
+
     public WindScript windController;
 
     private AudioSource Select;
+
+    public Camera mainCamera;
 
     public enum GameState
     {
@@ -67,11 +71,14 @@ public class GameController : MonoBehaviour
                     {
                         pyramidDisplay.SetActive(true);
                         normalCamera.SetActive(false);
+                        //pyramidCameraRotator.startGame();
+                        pyramidCameraRotator.GetComponent<CameraRotator>().startGame();
                     }
                     else
                     {
                         normalCamera.SetActive(true);
                         pyramidDisplay.SetActive(false);
+                        normalCamera.GetComponent<CameraRotator>().startGame();
                     }
                 }
                 else if (Input.GetKeyDown("o"))
@@ -98,6 +105,8 @@ public class GameController : MonoBehaviour
                 {
                     Select.Play();
                     mirrorControls = true;
+                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
+                    Screen.SetResolution(720, 1334, true);
                     //controls to that of the holofil
                 }
                 else if (Input.GetKeyDown("p"))
@@ -105,6 +114,7 @@ public class GameController : MonoBehaviour
                     Select.Play();
                     mirrorControls = true;
                     pyramidUsed = true;
+                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
                     //controls to that of the pepper's cone
                 }
                 else if (Input.GetKeyDown("n"))
@@ -113,6 +123,7 @@ public class GameController : MonoBehaviour
                     mirrorControls = false;
                     pyramidUsed = false;
                     controllerUsed = false;
+                    mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
                     //return to the normal controls
                 }
                 else if (Input.GetKeyDown("c"))
