@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.4465782, g: 0.49641252, b: 0.5748167, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -401,7 +401,6 @@ GameObject:
   - component: {fileID: 115974996}
   - component: {fileID: 115974995}
   - component: {fileID: 115974994}
-  - component: {fileID: 115974997}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -485,19 +484,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 115974992}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &115974997
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 115974992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12727f6d6b120504b9b5cad354cf907b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 389404038}
 --- !u!1 &160660437
 GameObject:
   m_ObjectHideFlags: 0
@@ -792,6 +778,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1566331076}
+  Xrotation: 30
+  Yrotation: 0
+  normalstopper: 0
 --- !u!54 &286099034
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1009,6 +998,7 @@ MonoBehaviour:
   barrelRotator: {fileID: 115974992}
   barrel: {fileID: 160660437}
   hole: {fileID: 1516061788}
+  Head: {fileID: 115974993}
   Gamecontroller: {fileID: 1566331076}
   otherPlayer: 
   statsText: {fileID: 1933209867}
@@ -1991,7 +1981,6 @@ GameObject:
   - component: {fileID: 724232515}
   - component: {fileID: 724232514}
   - component: {fileID: 724232513}
-  - component: {fileID: 724232512}
   m_Layer: 0
   m_Name: Sphere (1)
   m_TagString: Untagged
@@ -2015,19 +2004,6 @@ Transform:
   m_Father: {fileID: 2122707749}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &724232512
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 724232510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12727f6d6b120504b9b5cad354cf907b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  player: {fileID: 1445489836}
 --- !u!135 &724232513
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -2317,6 +2293,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1566331076}
+  Xrotation: 30
+  Yrotation: 0
+  normalstopper: 0
 --- !u!54 &808101602
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2872,7 +2851,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1390925638}
   - component: {fileID: 1390925637}
-  - component: {fileID: 1390925636}
   m_Layer: 0
   m_Name: Camera (1)
   m_TagString: Untagged
@@ -2880,14 +2858,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1390925636
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1390925635}
-  m_Enabled: 1
 --- !u!20 &1390925637
 Camera:
   m_ObjectHideFlags: 0
@@ -3002,6 +2972,7 @@ MonoBehaviour:
   barrelRotator: {fileID: 724232510}
   barrel: {fileID: 955843762}
   hole: {fileID: 235548194}
+  Head: {fileID: 724232511}
   Gamecontroller: {fileID: 1566331076}
   otherPlayer: 
   statsText: {fileID: 1785699793}
@@ -3451,6 +3422,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameController: {fileID: 1566331076}
+  Xrotation: 30
+  Yrotation: 0
+  normalstopper: 0
 --- !u!54 &1464879235
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3627,7 +3601,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1478585881}
   - component: {fileID: 1478585880}
-  - component: {fileID: 1478585879}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -3635,14 +3608,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1478585879
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1478585878}
-  m_Enabled: 1
 --- !u!20 &1478585880
 Camera:
   m_ObjectHideFlags: 0
@@ -3990,7 +3955,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1636228526}
   - component: {fileID: 1636228525}
-  - component: {fileID: 1636228524}
   m_Layer: 0
   m_Name: Camera (3)
   m_TagString: Untagged
@@ -3998,14 +3962,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &1636228524
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1636228523}
-  m_Enabled: 1
 --- !u!20 &1636228525
 Camera:
   m_ObjectHideFlags: 0
@@ -4266,8 +4222,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownTurn: 0
   shootMode: 0
-  dead: 0
-  winner: 0
 --- !u!114 &1785699794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4986,8 +4940,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ownTurn: 0
   shootMode: 0
-  dead: 0
-  winner: 0
 --- !u!1 &2081757248
 GameObject:
   m_ObjectHideFlags: 0
@@ -5192,7 +5144,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2087104095}
   - component: {fileID: 2087104094}
-  - component: {fileID: 2087104093}
   m_Layer: 0
   m_Name: Camera (2)
   m_TagString: Untagged
@@ -5200,14 +5151,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &2087104093
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2087104092}
-  m_Enabled: 1
 --- !u!20 &2087104094
 Camera:
   m_ObjectHideFlags: 0

@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour
     public GameObject barrel;
     public GameObject hole;
 
+    public Transform Head;
+    private Transform transform;
+
     public GameController Gamecontroller;
 
     public string otherPlayer;
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        transform = GetComponent<Transform>();
         rbBullet = bullet.GetComponent<Rigidbody>();
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         OwnTurn = false;
@@ -103,6 +107,7 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        Head.position = new Vector3(transform.position.x, transform.position.y + 0.8f, transform.position.z);
         if (OwnTurn == true)
         {
             switch (playerState)
@@ -113,7 +118,6 @@ public class PlayerController : MonoBehaviour
                 case PlayerState.Shooting:
                     RotateBarrel();
                     break;
-
             }
         }
         else

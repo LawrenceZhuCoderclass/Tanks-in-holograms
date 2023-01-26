@@ -15,7 +15,8 @@ public class GameController : MonoBehaviour
     
     private PlayerController player_1_script;
     private PlayerController player_2_script;
-    
+
+    //public Text_Script Text_Script;
     private GameState gameState;
 
     public playerText player_1_text;
@@ -36,8 +37,8 @@ public class GameController : MonoBehaviour
 
     private AudioSource Select;
 
+    Text_Script[] scripts; 
     public Camera mainCamera;
-
     public enum GameState
     {
         Start,
@@ -51,8 +52,14 @@ public class GameController : MonoBehaviour
     {
         player_1_script = player_1.GetComponent<PlayerController>();
         player_2_script = player_2.GetComponent<PlayerController>();
+        scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
         Select = GetComponent<AudioSource>();
         currentturn = true;
+        
+        /*for (int i = 0; i < scripts.Length; i++)
+        {
+            Debug.Log(scripts[i]);
+        }*/
         //true means player-1's turn, false means player_2's turn
 
     }
@@ -64,18 +71,37 @@ public class GameController : MonoBehaviour
             case GameState.Start:
                 if (Input.GetKeyDown("space"))
                 {
+                    //check what projection is used and if controllers are conected and change the controls accordingly
                     gameState = GameState.Playing;
                     StartText.SetActive(false);
                     Field.SetActive(true);
                     if (pyramidUsed)
                     {
+                        for (int i = 0; i < scripts.Length; i++)
+                        {
+                            scripts[i].normalstopper = 1;
+                        }
                         pyramidDisplay.SetActive(true);
                         normalCamera.SetActive(false);
-                        //pyramidCameraRotator.startGame();
                         pyramidCameraRotator.GetComponent<CameraRotator>().startGame();
+                    }
+                    else if (mirrorControls)
+                    {/*
+                        for (int i = 0; i < scripts.Length; i++)
+                        {
+                            scripts[i].Xrotation = -30.0f;
+                            scripts[i].Yrotation = 100.0f;
+                            scripts[i].normalstopper = 0;
+                        }*/
                     }
                     else
                     {
+                        /*for (int i = 0; i < scripts.Length; i++)
+                        {
+                            scripts[i].Xrotation = 30.0f;
+                            scripts[i].Yrotation = 0.0f;
+                            scripts[i].normalstopper = 0;
+                        }*/
                         normalCamera.SetActive(true);
                         pyramidDisplay.SetActive(false);
                         normalCamera.GetComponent<CameraRotator>().startGame();
@@ -130,14 +156,29 @@ public class GameController : MonoBehaviour
                 {
                     Select.Play();
                     controllerUsed = true;
+                    //This is called when controllers are used
                 }
                 break;
 
             case GameState.Playing:
-                Time.timeScale = 1;
+                
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Paused;
+                    if (mirrorControls && !pyramidUsed)
+                    {
+                        for (int i = 0; i < scripts.Length; i++)
+                        {
+                            scripts[i].SetToHolofil();
+                        }
+                    }
+                    else if (!pyramidUsed)
+                    {
+                        for (int i = 0; i < scripts.Length; i++)
+                        {
+                            scripts[i].SetToNormal();
+                        }
+                    }
                     Field.SetActive(false);
                     PauseText.SetActive(true);
                 }
@@ -146,6 +187,7 @@ public class GameController : MonoBehaviour
                 if(Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Playing;
+                    Time.timeScale = 1;
                     PauseText.SetActive(false);
                     Field.SetActive(true);
                 }
@@ -169,20 +211,20 @@ public class GameController : MonoBehaviour
     {
         Debug.Log(name + "is the winner!!!");
         gameState = GameState.End;
-        //Time.timeScale = 0;
         if (name == "player_1")
         {
-            player_1_text.winner = true;
-            player_2_text.dead = true;
+            player_1_text.WinnerText();
+            player_2_text.LoserText();
         }
         else if (name == "player_2")
         {
-            player_2_text.winner = true;
-            player_1_text.dead = true;
+            player_1_text.LoserText();
+            player_2_text.WinnerText();
         }
         player_1_script.enabled = false;
         player_2_script.enabled = false;
     }
+    
     public void NextTurn()
     {
         windController.changeWind();
@@ -193,8 +235,6 @@ public class GameController : MonoBehaviour
             player_2_text.shootMode = false;
             player_2_script.OwnTurn = true;
             player_2_text.ownTurn = true;
-            //player_2_script.MoveHorizontal = 0.0f;
-            //player_2_script.MoveVertical = 0.0f;
         }
         else if (currentturn == false)
         {
@@ -203,8 +243,7 @@ public class GameController : MonoBehaviour
             player_1_text.shootMode = false;
             player_1_script.OwnTurn = true;
             player_1_text.ownTurn = true;
-            //player_1_script.MoveHorizontal = 0.0f;
-            //player_1_script.MoveVertical = 0.0f;
         }
     }
+
 }

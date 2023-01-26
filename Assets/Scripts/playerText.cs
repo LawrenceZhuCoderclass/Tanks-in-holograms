@@ -19,8 +19,6 @@ public class playerText : MonoBehaviour
     private int percentFuel;
     public bool ownTurn;
     public bool shootMode;
-    public bool dead;
-    public bool winner;
     private TextMeshPro textMesh;
 
     //public GameController gameController;
@@ -41,24 +39,12 @@ public class playerText : MonoBehaviour
     void FixedUpdate()
     {
         //rotate the score
-        //Quaternion deltaRotation = Quaternion.Euler(eulerAngleVelocity * Time.fixedDeltaTime);
-        //rb.MoveRotation(rb.rotation * deltaRotation);
-
         transform.position = new Vector3(transform.parent.transform.position.x,
                                          transform.parent.transform.position.y + 2.0f,
                                          transform.parent.transform.position.z);
-
         currentHP = transform.GetComponentInParent<PlayerController>().hp;
         percentHP = (int)(currentHP / startHP * 100);
-        if (winner)
-        {
-            textMesh.SetText("Winner!");
-        }
-        else if (dead)
-        {
-            textMesh.SetText("<br>");
-        }
-        else if (ownTurn && shootMode)
+        if (ownTurn && shootMode)
         {
             currentPow = transform.GetComponentInParent<PlayerController>().power;
             percentPow = (int)(currentPow / startPow * 100);
@@ -75,6 +61,16 @@ public class playerText : MonoBehaviour
     }
 
     public void noText()
+    {
+        textMesh.SetText("<br>");
+    }
+    //This function gets called when a player wins
+    public void WinnerText()
+    {
+        textMesh.SetText("Winner!");
+    }
+    //This function is called when a player loses
+    public void LoserText()
     {
         textMesh.SetText("<br>");
     }
