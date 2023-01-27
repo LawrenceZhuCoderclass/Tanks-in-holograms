@@ -52,11 +52,11 @@ public class CameraRotator : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float RotateHorizontal = Input.GetAxis(cameraInputY);
+        float RotateHorizontal = Input.GetAxis(cameraInputX);
         roty -= mirrormultiplier * RotateHorizontal * rotateSpeed;
         if (!pyramidCamera)
         {
-            float RotateVertical = Input.GetAxis(cameraInputX);
+            float RotateVertical = Input.GetAxis(cameraInputY);
             rotx -= RotateVertical * rotateSpeed;
             rotx = Mathf.Clamp(rotx, -30, 45);
         }
@@ -78,6 +78,16 @@ public class CameraRotator : MonoBehaviour
         else
         {
             mirrormultiplier = 1f;
+        }
+        if (Gamecontroller.controllerUsed)
+        {
+            cameraInputX = "ControllerHorizontalCamera";
+            cameraInputY = "ControllerVerticalCamera";
+        }
+        else
+        {
+            cameraInputX = "HorizontalCamera";
+            cameraInputY = "VerticalCamera";
         }
     }
 }

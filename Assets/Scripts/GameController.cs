@@ -93,6 +93,9 @@ public class GameController : MonoBehaviour
                             scripts[i].Yrotation = 100.0f;
                             scripts[i].normalstopper = 0;
                         }*/
+                        normalCamera.SetActive(true);
+                        pyramidDisplay.SetActive(false);
+                        normalCamera.transform.position = new Vector3(normalCamera.transform.position.x, normalCamera.transform.position.y - 5, normalCamera.transform.position.z);
                     }
                     else
                     {
@@ -211,6 +214,8 @@ public class GameController : MonoBehaviour
     {
         Debug.Log(name + "is the winner!!!");
         gameState = GameState.End;
+        player_1_text.gameOver = true;
+        player_2_text.gameOver = true;
         if (name == "player_1")
         {
             player_1_text.WinnerText();

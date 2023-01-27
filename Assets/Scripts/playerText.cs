@@ -20,6 +20,7 @@ public class playerText : MonoBehaviour
     public bool ownTurn;
     public bool shootMode;
     private TextMeshPro textMesh;
+    public bool gameOver;
 
     //public GameController gameController;
     //public CameraRotator cameraAngle;
@@ -34,6 +35,7 @@ public class playerText : MonoBehaviour
         startPow = transform.GetComponentInParent<PlayerController>().beginPower;
         startHP = transform.GetComponentInParent<PlayerController>().startHP;
         startFuel = transform.GetComponentInParent<PlayerController>().Fuel;
+        gameOver = false;
     }
 
     void FixedUpdate()
@@ -44,14 +46,14 @@ public class playerText : MonoBehaviour
                                          transform.parent.transform.position.z);
         currentHP = transform.GetComponentInParent<PlayerController>().hp;
         percentHP = (int)(currentHP / startHP * 100);
-        if (ownTurn && shootMode)
+        if (!gameOver && ownTurn && shootMode)
         {
             currentPow = transform.GetComponentInParent<PlayerController>().power;
             percentPow = (int)(currentPow / startPow * 100);
             textMesh.SetText("Power: " + percentPow.ToString() + "%<br>" +
                              "Health: " + percentHP.ToString() + "%");
         }
-        else if (ownTurn && !shootMode)
+        else if (!gameOver && ownTurn && !shootMode)
         {
             currentFuel = transform.GetComponentInParent<PlayerController>().Fuel;
             percentFuel = (int)(currentFuel / startFuel * 100);
