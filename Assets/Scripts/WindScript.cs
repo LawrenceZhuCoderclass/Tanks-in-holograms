@@ -13,10 +13,8 @@ public class WindScript : MonoBehaviour
     void Start()
     {
         windStrength = Random.Range(0, maxStartStrength);
-        //windStrength = 10;
         transform.rotation = Quaternion.Euler(0, Random.Range(0, 360f), 90f);
         realWindStrength = Mathf.Pow((windStrength*Mathf.Sqrt(5)), 2);
-        //transform.localScale = new Vector3(realWindStrength * 0.1f/5f, realWindStrength * 0.04f/5f, realWindStrength * 0.2f/5f);
         windtext.SetText(((int)(realWindStrength/5*120)).ToString());
     }
     public void changeWind()
@@ -34,7 +32,6 @@ public class WindScript : MonoBehaviour
             transform.rotation = Quaternion.Euler(0, transform.rotation.y + 180f, 90f);
         }
         realWindStrength = Mathf.Pow((windStrength * Mathf.Sqrt(5)), 2);
-        //transform.localScale = new Vector3(realWindStrength * 0.1f / 5f, realWindStrength * 0.04f / 5f, realWindStrength * 0.2f / 5f);
         windtext.SetText(((int)(realWindStrength / 5 * 120)).ToString());
     }
 }

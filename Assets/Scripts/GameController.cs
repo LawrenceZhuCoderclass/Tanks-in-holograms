@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
     public bool pyramidUsed;
     public bool controllerUsed;
     
+    private int testInt = 0;
     private bool currentturn;
 
     public GameObject pyramidDisplay;
@@ -38,7 +39,9 @@ public class GameController : MonoBehaviour
     private AudioSource Select;
 
     Text_Script[] scripts; 
+
     public Camera mainCamera;
+
     public enum GameState
     {
         Start,
@@ -50,16 +53,13 @@ public class GameController : MonoBehaviour
 
     void Start()
     {
+        Debug.Log("this is from the start");
+        Debug.Log(testInt);
         player_1_script = player_1.GetComponent<PlayerController>();
         player_2_script = player_2.GetComponent<PlayerController>();
         scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
         Select = GetComponent<AudioSource>();
         currentturn = true;
-        
-        /*for (int i = 0; i < scripts.Length; i++)
-        {
-            Debug.Log(scripts[i]);
-        }*/
         //true means player-1's turn, false means player_2's turn
 
     }
@@ -86,25 +86,13 @@ public class GameController : MonoBehaviour
                         pyramidCameraRotator.GetComponent<CameraRotator>().startGame();
                     }
                     else if (mirrorControls)
-                    {/*
-                        for (int i = 0; i < scripts.Length; i++)
-                        {
-                            scripts[i].Xrotation = -30.0f;
-                            scripts[i].Yrotation = 100.0f;
-                            scripts[i].normalstopper = 0;
-                        }*/
+                    {
                         normalCamera.SetActive(true);
                         pyramidDisplay.SetActive(false);
                         normalCamera.transform.position = new Vector3(normalCamera.transform.position.x, normalCamera.transform.position.y - 5, normalCamera.transform.position.z);
                     }
                     else
                     {
-                        /*for (int i = 0; i < scripts.Length; i++)
-                        {
-                            scripts[i].Xrotation = 30.0f;
-                            scripts[i].Yrotation = 0.0f;
-                            scripts[i].normalstopper = 0;
-                        }*/
                         normalCamera.SetActive(true);
                         pyramidDisplay.SetActive(false);
                         normalCamera.GetComponent<CameraRotator>().startGame();
@@ -130,11 +118,12 @@ public class GameController : MonoBehaviour
                     OptionsText.SetActive(false);
                     StartText.SetActive(true);
                 }
-                if (Input.GetKeyDown("h"))
+                else if (Input.GetKeyDown("h"))
                 {
                     Select.Play();
                     mirrorControls = true;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
+                    
                     Screen.SetResolution(720, 1334, true);
                     //controls to that of the holofil
                 }
@@ -198,16 +187,18 @@ public class GameController : MonoBehaviour
                 {
                     gameState = GameState.Start;
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+                    Debug.Log("This is the end");
+                    testInt = 5;
+                    Debug.Log(testInt);
+
                 }
                 break;
             case GameState.End:
                 if (Input.GetKeyDown("r"))
                 {
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-                    Time.timeScale = 1;
                 }
                 break;
-
         }
     }
     public void Winner_Declaration(string name)
@@ -250,5 +241,4 @@ public class GameController : MonoBehaviour
             player_1_text.ownTurn = true;
         }
     }
-
 }
