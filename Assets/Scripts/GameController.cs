@@ -122,8 +122,13 @@ public class GameController : MonoBehaviour
                 {
                     Select.Play();
                     mirrorControls = true;
+                    pyramidUsed = false;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
-                    
+                    for (int i = 0; i < scripts.Length; i++)
+                    {
+                        scripts[i].normalstopper = 0;
+                        scripts[i].SetToHolofil();
+                    }
                     Screen.SetResolution(720, 1334, true);
                     //controls to that of the holofil
                 }
@@ -133,6 +138,11 @@ public class GameController : MonoBehaviour
                     mirrorControls = true;
                     pyramidUsed = true;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+                    for (int i = 0; i < scripts.Length; i++)
+                    {
+                        scripts[i].SetToNormal();
+                        scripts[i].normalstopper = 1;
+                    }
                     //controls to that of the pepper's cone
                 }
                 else if (Input.GetKeyDown("n"))
@@ -142,6 +152,11 @@ public class GameController : MonoBehaviour
                     pyramidUsed = false;
                     controllerUsed = false;
                     mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
+                    for (int i = 0; i < scripts.Length; i++)
+                    {
+                        scripts[i].normalstopper = 0;
+                        scripts[i].SetToNormal();
+                    }
                     //return to the normal controls
                 }
                 else if (Input.GetKeyDown("c"))
