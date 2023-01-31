@@ -8,6 +8,7 @@ TagManager:
   - Player_1
   - Player_2
   - Wind
+  - SettingsSaver
   layers:
   - Default
   - TransparentFX

@@ -286,4 +286,23 @@ public class PlayerController : MonoBehaviour
         if (newState == "Shooting") { playerState = PlayerState.Shooting; }
         else if (newState == "Driving") { playerState = PlayerState.Driving; }
     }
+    public void Reset()
+    {
+        //here comes the code where verything resets.
+        TouchOnce = false;
+        transform.position = new Vector3 (0f, -0.7f, 0);
+        /*if (gameObject.tag == "Player_1")
+        {
+            
+            //change to orignial position of player_1
+        }
+        else
+        {
+            transform.position = new Vector3 ()
+            //change to the original position of player_2
+        }*/
+        hp = 10.0f;
+        OwnTurn = false;
+        playerState = PlayerState.Driving;
+    }
 }
