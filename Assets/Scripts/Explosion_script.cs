@@ -19,6 +19,7 @@ public class Explosion_script : MonoBehaviour
 
     void FixedUpdate()
     {
+        //The collider grows until the sound stops playing, giving the effect of an explosion
         collider.radius += 0.2f;
         if (collider.radius >= 1.6f)
         {
@@ -41,11 +42,9 @@ public class Explosion_script : MonoBehaviour
 
     void OnCollisionEnter (Collision collision)
     {
-        //Debug.Log("Hit");
         if (collision.gameObject.tag == "Player_1" || collision.gameObject.tag == "Player_2")
         {
             collision.gameObject.GetComponent<PlayerController>().TakeDamage(Mathf.Pow(1/collider.radius, 1.2f));
-            //collision.gameObject.GetComponent<PlayerController>().TakeDamage(2.0f);
         }
     }
 }

@@ -4,39 +4,39 @@ using UnityEngine;
 
 public class CameraRotator : MonoBehaviour
 {
-    //private Rigidbody rb;
     private float roty;
     private float rotx;
     public float rotateSpeed = 1.0f;
-    public GameController Gamecontroller;
-    private string cameraInputY;
-    private string cameraInputX;
-    public PlayerController player1;
-    public PlayerController player2;
-    private float startRotation;
-    public GameObject player_1_text;
-    public GameObject player_2_text;
-    public bool pyramidCamera;
     private float mirrormultiplier;
     private float pyramidtextrotation;
+    private float startRotation;
 
-    // Start is called before the first frame update
+    public GameController Gamecontroller;
+
+    private string cameraInputY;
+    private string cameraInputX;
+
+    public PlayerController player1;
+    public PlayerController player2;
+
+    public GameObject player_1_text;
+    public GameObject player_2_text;
+
+    public bool pyramidCamera;
+
     void Start()
     {
-        //mirrormultiplier = 1f;
         pyramidtextrotation = 0f;
         startRotation = transform.eulerAngles.y;
-        //mirrormultiplier = 0.0f;
-        //rb = GetComponent<Rigidbody>();
         if (Gamecontroller.controllerUsed)
         {
-            cameraInputY = "ControllerHorizontalCamera";
-            cameraInputX = "ControllerVerticalCamera";
+            cameraInputX = "ControllerHorizontalCamera";
+            cameraInputY = "ControllerVerticalCamera";
         }
         else
         {
-            cameraInputY = "HorizontalCamera";
-            cameraInputX = "VerticalCamera";
+            cameraInputX = "HorizontalCamera";
+            cameraInputY = "VerticalCamera";
         }
         if (Gamecontroller.mirrorControls && !Gamecontroller.pyramidUsed)
         {
@@ -49,7 +49,6 @@ public class CameraRotator : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void FixedUpdate()
     {
         float RotateHorizontal = Input.GetAxis(cameraInputX);
@@ -60,7 +59,10 @@ public class CameraRotator : MonoBehaviour
             rotx -= RotateVertical * rotateSpeed;
             rotx = Mathf.Clamp(rotx, -30, 45);
         }
-        else { rotx = 0.0f; }
+        else 
+        {
+            rotx = 0.0f;
+        } 
 
         transform.eulerAngles = new Vector3(rotx, roty, 0.0f);
         player1.cameraAngle = (transform.eulerAngles.y-startRotation) * Mathf.Deg2Rad;

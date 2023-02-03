@@ -1900,13 +1900,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 724007601}
-  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.6532815, w: 0.27059805}
-  m_LocalPosition: {x: -0.7, y: 0, z: 0}
+  m_LocalRotation: {x: -0.6532815, y: -0.27059805, z: -0.27059805, w: 0.6532815}
+  m_LocalPosition: {x: 0.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 169404548}
   m_RootOrder: 3
-  m_LocalEulerAnglesHint: {x: -90, y: 135, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: -45, z: 0}
 --- !u!64 &724007603
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -2773,9 +2773,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30358f8e6679c4c4eacd26b9187f1ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HolofilUsed: 0
-  PyramidUsed: 0
-  ControllerUsed: 0
 --- !u!4 &1104678450
 Transform:
   m_ObjectHideFlags: 0
@@ -3772,7 +3769,6 @@ MonoBehaviour:
   OptionsText: {fileID: 1464879232}
   PauseText: {fileID: 286099031}
   Field: {fileID: 918562948}
-  SettingSaverObject: {fileID: 0}
   player_1_text: {fileID: 1933209867}
   player_2_text: {fileID: 1785699793}
   mirrorControls: 0
@@ -4543,13 +4539,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1800264704}
-  m_LocalRotation: {x: -0.6532815, y: -0.27059805, z: -0.27059805, w: 0.6532815}
-  m_LocalPosition: {x: 0.7, y: 0, z: 0}
+  m_LocalRotation: {x: -0.27059805, y: 0.6532815, z: 0.6532815, w: 0.27059805}
+  m_LocalPosition: {x: -0.7, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 169404548}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: -90, y: -45, z: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 135, z: 0}
 --- !u!64 &1800264706
 MeshCollider:
   m_ObjectHideFlags: 0

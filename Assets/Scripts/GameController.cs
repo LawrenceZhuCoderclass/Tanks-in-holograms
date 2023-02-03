@@ -16,8 +16,6 @@ public class GameController : MonoBehaviour
     private PlayerController player_1_script;
     private PlayerController player_2_script;
 
-
-    //public Text_Script Text_Script;
     private GameState gameState;
 
     public playerText player_1_text;
@@ -57,10 +55,8 @@ public class GameController : MonoBehaviour
         player_2_script = player_2.GetComponent<PlayerController>();
         Select = GetComponent<AudioSource>();
         scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
-        currentturn = true;
-        //SettingSaverObject = GameObject.Find("SettingsSaver");
-        //settingsSaver = SettingSaverObject.GetComponent<SettingsSaver>();
-        //true means player-1's turn, false means player_2's turn        
+        //true means player-1's turn, false means player_2's turn
+        currentturn = true;      
     }
 
     void Update()
@@ -89,6 +85,7 @@ public class GameController : MonoBehaviour
                         normalCamera.SetActive(true);
                         pyramidDisplay.SetActive(false);
                         normalCamera.transform.position = new Vector3(normalCamera.transform.position.x, normalCamera.transform.position.y - 5, normalCamera.transform.position.z);
+                        normalCamera.GetComponent<CameraRotator>().startGame();
                     }
                     else
                     {
@@ -121,14 +118,12 @@ public class GameController : MonoBehaviour
                 {
                     SettingsSaver.HolofilUsed = true;
                     SettingsSaver.PyramidUsed = false;
-                    //Debug.Log("Holofil key is pressed");
                     ChangeToHolofil();
                 }
                 else if (Input.GetKeyDown("p"))
                 {
                     SettingsSaver.PyramidUsed = true;
                     SettingsSaver.HolofilUsed = false;
-                    //Debug.Log("PyramidKey is pressed");
                     ChangeToPyramid();
                 }
                 else if (Input.GetKeyDown("n"))
@@ -137,7 +132,6 @@ public class GameController : MonoBehaviour
                 }
                 else if (Input.GetKeyDown("c"))
                 {
-                    //Debug.Log("controllerkey is pressed");
                     SettingsSaver.ControllerUsed = true;
                     ChangeToController();
                 }
@@ -148,7 +142,6 @@ public class GameController : MonoBehaviour
                 if (Input.GetKeyDown(KeyCode.Escape))
                 {
                     gameState = GameState.Paused;
-                    //scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
                     if (mirrorControls && !pyramidUsed)
                     {
                         for (int i = 0; i < scripts.Length; i++)
@@ -178,7 +171,6 @@ public class GameController : MonoBehaviour
                 if(Input.GetKeyDown("e"))
                 {
                     gameState = GameState.Start;
-                    //DontDestroyOnLoad(SettingSaverObject);
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
                 }
@@ -186,8 +178,6 @@ public class GameController : MonoBehaviour
             case GameState.End:
                 if (Input.GetKeyDown("r"))
                 {
-                    //player_1_script.Reset();
-                    //player_2_script.Reset();
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
                 }
                 break;
@@ -235,12 +225,10 @@ public class GameController : MonoBehaviour
     public void ChangeToHolofil()
     {
         Debug.Log("changing to Holofil");
-        //Select = GetComponent<AudioSource>();
         Select.Play();
         mirrorControls = true;
         pyramidUsed = false;
         mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 90);
-        //scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
         for (int i = 0; i < scripts.Length; i++)
         {
             scripts[i].normalstopper = 0;
@@ -252,12 +240,10 @@ public class GameController : MonoBehaviour
     public void ChangeToPyramid()
     {
         Debug.Log("changing to Pyramid");
-        //Select = GetComponent<AudioSource>();
         Select.Play();
         mirrorControls = true;
         pyramidUsed = true;
         mainCamera.transform.rotation = Quaternion.Euler(mainCamera.transform.eulerAngles.x, mainCamera.transform.eulerAngles.y, 0);
-        //scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
         for (int i = 0; i < scripts.Length; i++)
         {
             scripts[i].SetToNormal();

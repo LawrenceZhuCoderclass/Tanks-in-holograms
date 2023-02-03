@@ -22,9 +22,6 @@ public class playerText : MonoBehaviour
     private TextMeshPro textMesh;
     public bool gameOver;
 
-    //public GameController gameController;
-    //public CameraRotator cameraAngle;
-
     void Start()
     {
         rb = GetComponent<Rigidbody>();

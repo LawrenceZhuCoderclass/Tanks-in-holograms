@@ -5,9 +5,13 @@ using UnityEngine;
 public class Text_Script : MonoBehaviour
 {
     private Rigidbody rb;
+
     private Vector3 eulerAngleVelocity;
+
     public GameController gameController;
+
     public int normalstopper = 0;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();

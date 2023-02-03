@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody rb;
-    private Rigidbody rbBullet;
 
     public AudioSource DriveSound;
     public AudioSource TurnSound;
@@ -67,7 +66,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         transform = GetComponent<Transform>();
-        rbBullet = bullet.GetComponent<Rigidbody>();
+
         rb.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;
         OwnTurn = false;
         hp = startHP;
@@ -246,8 +245,6 @@ public class PlayerController : MonoBehaviour
     {
         float RotateHorizontal = mirrorcontrol * Input.GetAxis(playerXInput);
         float RotateVertical = Input.GetAxis(playerYInput);
-        //Debug.Log(RotateVertical);
-       // Debug.Log(RotateHorizontal);
         rotx -= RotateHorizontal * rotateSpeed;
         roty -= RotateVertical * rotateSpeed;
         if (RotateHorizontal != 0.0f || RotateVertical != 0.0f)
@@ -291,16 +288,6 @@ public class PlayerController : MonoBehaviour
         //here comes the code where verything resets.
         TouchOnce = false;
         transform.position = new Vector3 (0f, -0.7f, 0);
-        /*if (gameObject.tag == "Player_1")
-        {
-            
-            //change to orignial position of player_1
-        }
-        else
-        {
-            transform.position = new Vector3 ()
-            //change to the original position of player_2
-        }*/
         hp = 10.0f;
         OwnTurn = false;
         playerState = PlayerState.Driving;
