@@ -34,5 +34,4 @@ public class Text_Script : MonoBehaviour
     {
         transform.eulerAngles = new Vector3(30.0f, 0.0f, 0.0f);
     }
-
 }

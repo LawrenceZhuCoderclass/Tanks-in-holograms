@@ -10,23 +10,25 @@ public class playerText : MonoBehaviour
 
     private float startPow;
     private float currentPow;
-    private int percentPow;
     private float startHP;
     private float currentHP;
-    private int percentHP;
     private float startFuel;
     private float currentFuel;
+
+    private int percentPow;
+    private int percentHP;
     private int percentFuel;
+
     public bool ownTurn;
     public bool shootMode;
-    private TextMeshPro textMesh;
     public bool gameOver;
+    
+    private TextMeshPro textMesh;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         eulerAngleVelocity = new Vector3(0, 25, 0);
-
         textMesh = GetComponent<TextMeshPro>();
         textMesh.SetText("<br>");
         startPow = transform.GetComponentInParent<PlayerController>().beginPower;
@@ -63,14 +65,16 @@ public class playerText : MonoBehaviour
     {
         textMesh.SetText("<br>");
     }
-    //This function gets called when a player wins
+
     public void WinnerText()
     {
+        //This function gets called when a player wins
         textMesh.SetText("Winner!");
     }
-    //This function is called when a player loses
+
     public void LoserText()
     {
+        //This function is called when a player loses
         textMesh.SetText("<br>");
     }
 }

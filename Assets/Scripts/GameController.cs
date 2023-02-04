@@ -8,11 +8,18 @@ public class GameController : MonoBehaviour
 {
     public GameObject player_1;
     public GameObject player_2;
+
     public GameObject StartText;
     public GameObject OptionsText;
     public GameObject PauseText;
+
     public GameObject Field;
     
+    public GameObject pyramidDisplay;
+    public GameObject normalCamera;
+
+    public GameObject pyramidCameraRotator;
+
     private PlayerController player_1_script;
     private PlayerController player_2_script;
 
@@ -26,11 +33,6 @@ public class GameController : MonoBehaviour
     public bool controllerUsed;
     
     private bool currentturn;
-
-    public GameObject pyramidDisplay;
-    public GameObject normalCamera;
-
-    public GameObject pyramidCameraRotator;
 
     public WindScript windController;
 
@@ -55,8 +57,8 @@ public class GameController : MonoBehaviour
         player_2_script = player_2.GetComponent<PlayerController>();
         Select = GetComponent<AudioSource>();
         scripts = Resources.FindObjectsOfTypeAll(typeof(Text_Script)) as Text_Script[];
-        //true means player-1's turn, false means player_2's turn
         currentturn = true;      
+        //True means player-1's turn, false means player_2's turn
     }
 
     void Update()
@@ -66,7 +68,7 @@ public class GameController : MonoBehaviour
             case GameState.Start:
                 if (Input.GetKeyDown("space"))
                 {
-                    //check what projection is used and if controllers are conected and change the controls accordingly
+                    //Check what projection is used and if controllers are conected and change the controls accordingly
                     gameState = GameState.Playing;
                     StartText.SetActive(false);
                     Field.SetActive(true);
@@ -204,6 +206,8 @@ public class GameController : MonoBehaviour
     
     public void NextTurn()
     {
+
+        //Change variables to change turns
         windController.changeWind();
         if (currentturn == true)
         {
@@ -224,7 +228,6 @@ public class GameController : MonoBehaviour
     }
     public void ChangeToHolofil()
     {
-        Debug.Log("changing to Holofil");
         Select.Play();
         mirrorControls = true;
         pyramidUsed = false;
@@ -239,7 +242,6 @@ public class GameController : MonoBehaviour
     }
     public void ChangeToPyramid()
     {
-        Debug.Log("changing to Pyramid");
         Select.Play();
         mirrorControls = true;
         pyramidUsed = true;
@@ -253,7 +255,6 @@ public class GameController : MonoBehaviour
     }
     public void ChangeToController()
     {
-        Debug.Log("changing to controller");
         Select.Play();
         controllerUsed = true;
         //This is called when controllers are used
