@@ -110,6 +110,7 @@ public class GameController : MonoBehaviour
                 normalCamera.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                 pyramidCameraRotator.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
                 break;
+
             case GameState.Options:
                 if (Input.GetKeyDown("e"))
                 {
@@ -139,6 +140,8 @@ public class GameController : MonoBehaviour
                     SettingsSaver.ControllerUsed = true;
                     ChangeToController();
                 }
+                normalCamera.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                pyramidCameraRotator.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
                 break;
 
             case GameState.Playing:
@@ -164,6 +167,7 @@ public class GameController : MonoBehaviour
                     PauseText.SetActive(true);
                 }
                 break;
+
             case GameState.Paused:
                 if(Input.GetKeyDown(KeyCode.Escape))
                 {
@@ -181,6 +185,7 @@ public class GameController : MonoBehaviour
                 normalCamera.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
                 pyramidCameraRotator.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
                 break;
+
             case GameState.End:
                 if (Input.GetKeyDown("r"))
                 {
