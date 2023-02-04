@@ -107,6 +107,8 @@ public class GameController : MonoBehaviour
                 {
                     gameState = GameState.End;
                 }
+                normalCamera.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                pyramidCameraRotator.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
                 break;
             case GameState.Options:
                 if (Input.GetKeyDown("e"))
@@ -176,6 +178,8 @@ public class GameController : MonoBehaviour
                     SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 
                 }
+                normalCamera.transform.eulerAngles = new Vector3(0.0f, 0.0f, 0.0f);
+                pyramidCameraRotator.transform.eulerAngles = new Vector3(0.0f, 90.0f, 0.0f);
                 break;
             case GameState.End:
                 if (Input.GetKeyDown("r"))
